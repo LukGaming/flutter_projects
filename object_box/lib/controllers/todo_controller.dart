@@ -1,6 +1,6 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
-import 'package:object_box/entities/todo.dart';
+import 'package:object_box/domain/entities/todo.dart';
 
 class TodoController extends ChangeNotifier {
   List<Todo> _todos = [];

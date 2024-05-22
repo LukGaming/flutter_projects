@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:object_box/controllers/todo_controller.dart';
-import 'package:object_box/entities/todo.dart';
+import 'package:object_box/domain/entities/todo.dart';
 
 class TodoWidget extends StatelessWidget {
   final Todo todo;
