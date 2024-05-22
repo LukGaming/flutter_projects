@@ -1,7 +1,10 @@
 import 'package:di_test/controllers/counter_controller.dart';
+import 'package:di_test/injector.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 void main() {
+  injector();
   runApp(const MyApp());
 }
 
@@ -31,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _counterController = CounterController();
+  final _counterController = GetIt.instance<CounterController>();
 
   @override
   Widget build(BuildContext context) {
