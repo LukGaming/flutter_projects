@@ -54,6 +54,9 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
                     }
                   },
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 ElevatedButton(
                   onPressed: () {
                     var formIsValid = _formKey.currentState?.validate();

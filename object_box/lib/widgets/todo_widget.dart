@@ -13,9 +13,8 @@ class TodoWidget extends StatelessWidget {
     return ListTile(
       leading: Checkbox(
         value: todo.done,
-        onChanged: (value) => {
-          if (value != null) {_todoController.setTodoDone(todo, value)}
-        },
+        onChanged: (value) =>
+            {if (value != null) _todoController.setTodoDone(todo, value)},
       ),
       title: Text(todo.name),
       subtitle: Text(
@@ -23,6 +22,45 @@ class TodoWidget extends StatelessWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
+      trailing: IconButton(
+          onPressed: () async {
+            bool? remove = await showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                content: const Row(
+                  children: [
+                    Text("Deseja remover o todo?"),
+                  ],
+                ),
+                actions: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        child: const Text("Remover"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        },
+                        child: const Text("Cancelar"),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            );
+            if (remove == true) {
+              _todoController.removeTodo(
+                context: context,
+                todo: todo,
+              );
+            }
+          },
+          icon: const Icon(Icons.delete)),
     );
   }
 }
