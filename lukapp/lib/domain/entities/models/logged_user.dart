@@ -1,0 +1,7 @@
+class LoggedUser {
+  final int id;
+  final String name;
+  final String email;
+
+  LoggedUser({required this.id, required this.name, required this.email});
+}
