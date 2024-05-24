@@ -3,11 +3,8 @@ import 'package:object_box/injector.dart';
 import 'package:object_box/pages/todo_page.dart';
 
 void main() async {
-  var initDate = DateTime.now();
   await injector();
 
-  var finishDate = DateTime.now();
-  print(finishDate.difference(initDate));
   runApp(
     const MyApp(),
   );

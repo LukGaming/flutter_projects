@@ -1,8 +1,6 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:object_box/domain/entities/todo.dart';
-import 'package:object_box/domain/interfaces/abstract_todo_repository.dart';
+import 'package:object_box/domain/interfaces/Itodo_repository.dart';
 
 class TodoController extends ChangeNotifier {
   final ITodoRepository todoRepository;
@@ -19,9 +17,13 @@ class TodoController extends ChangeNotifier {
   void getTodos() async {
     setIsloading(true);
     _todos = [];
-    _todos = await todoRepository.getTodos();
-    _todos.forEach((element) => print(element.id));
+
+    _todos = await todoRepository.get();
     setIsloading(false);
+  }
+
+  void setTodos(List<Todo> todos) {
+    _todos = todos;
   }
 
   void setIsloading(bool value) {
@@ -31,9 +33,11 @@ class TodoController extends ChangeNotifier {
 
   void setTodoDone(Todo todo, bool value) async {
     int todoIndex = _todos.indexWhere((element) => element.id == todo.id);
+
+    await todoRepository.save(todo.copyWith(done: value));
+
     _todos[todoIndex] = todo.copyWith(done: value);
 
-    await todoRepository.saveTodo(todo);
     notifyListeners();
   }
 
@@ -41,9 +45,8 @@ class TodoController extends ChangeNotifier {
     required Todo todo,
     required BuildContext context,
   }) async {
-    _todos.add(await todoRepository.saveTodo(todo));
+    _todos.add(await todoRepository.save(todo));
     notifyListeners();
-
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -57,9 +60,7 @@ class TodoController extends ChangeNotifier {
     required BuildContext context,
   }) async {
     _todos.remove(todo);
-
-    await todoRepository.deleteTodo(todo);
-
+    await todoRepository.delete(todo);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text("Todo removido com sucesso!"),

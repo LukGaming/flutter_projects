@@ -20,28 +20,28 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(1, 3106973086333813257),
+      id: const obx_int.IdUid(1, 1357719179961764513),
       name: 'Todo',
-      lastPropertyId: const obx_int.IdUid(4, 1752120198345042844),
+      lastPropertyId: const obx_int.IdUid(4, 3246729721501405117),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 4191543618358074264),
+            id: const obx_int.IdUid(1, 3040824777854554085),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 4105875366455068876),
+            id: const obx_int.IdUid(2, 6572898762591735854),
             name: 'name',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 6500578396006383709),
+            id: const obx_int.IdUid(3, 4702900772476279777),
             name: 'body',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 1752120198345042844),
+            id: const obx_int.IdUid(4, 3246729721501405117),
             name: 'done',
             type: 1,
             flags: 0)
@@ -85,7 +85,7 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(1, 3106973086333813257),
+      lastEntityId: const obx_int.IdUid(1, 1357719179961764513),
       lastIndexId: const obx_int.IdUid(0, 0),
       lastRelationId: const obx_int.IdUid(0, 0),
       lastSequenceId: const obx_int.IdUid(0, 0),
