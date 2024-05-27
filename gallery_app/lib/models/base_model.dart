@@ -5,8 +5,8 @@ class BaseModel {
   DateTime? deletedAt;
   BaseModel({
     required this.id,
-    this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.deletedAt,
   });
 }

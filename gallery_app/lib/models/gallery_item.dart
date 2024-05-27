@@ -1,6 +1,4 @@
-import 'package:gallery_app/models/base_model.dart';
-
-class GalleryItem extends BaseModel {
+class GalleryItem {
   String name;
   String description;
   String imagePath;
@@ -11,5 +9,5 @@ class GalleryItem extends BaseModel {
     required this.description,
     required this.imagePath,
     required this.isFavorite,
-  }) : super(id: id);
+  });
 }
