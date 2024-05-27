@@ -18,7 +18,7 @@ class GalleryController extends ChangeNotifier {
         description: "Some image",
         imagePath:
             "https://miro.medium.com/v2/resize:fit:1400/1*fwUnqg-eJnoL3gI-pw8yDw.png",
-        isFavorite: false,
+        isFavorite: index % 4 == 0 ? false : true,
       ),
     );
     galleryItems = galleryList;
@@ -38,6 +38,7 @@ class GalleryController extends ChangeNotifier {
 
   void changeNavigationBarIndex(int value) {
     currentIndex = value;
+    currentIndex == 0 ? setShowFavorite(false) : setShowFavorite(true);
 
     notifyListeners();
   }
