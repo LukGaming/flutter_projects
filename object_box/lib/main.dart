@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:object_box/controllers/theme_controller.dart';
+import 'package:object_box/enums/theme.dart';
 import 'package:object_box/injector.dart';
 import 'package:object_box/pages/todo_page.dart';
 
@@ -15,13 +18,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    final _themeController = GetIt.instance<ThemeController>();
+    ETheme theme = ETheme.light;
+    return SizedBox.shrink(
+      child: ListenableBuilder(
+        listenable: _themeController,
+        builder: (_, __) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: _themeController.theme == ETheme.light
+                ? ThemeData.light()
+                : ThemeData.dark(),
+            // theme: ThemeData(
+            //   // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            //   useMaterial3: false,
+            // ),
+            home: const TodosPage(),
+          );
+        },
       ),
-      home: const TodosPage(),
     );
   }
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
+import 'package:object_box/controllers/theme_controller.dart';
 import 'package:object_box/controllers/todo_controller.dart';
+import 'package:object_box/enums/theme.dart';
 import 'package:object_box/pages/create_todo_page.dart';
 import 'package:object_box/widgets/todo_widget.dart';
 
@@ -21,7 +24,32 @@ class _TodosPageState extends State<TodosPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _themeController = GetIt.instance<ThemeController>();
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            ListenableBuilder(
+              listenable: _themeController,
+              builder: (_, __) {
+                return ListTile(
+                  leading: Checkbox(
+                    value:
+                        _themeController.theme == ETheme.light ? false : true,
+                    onChanged: (value) {
+                      if (value != null) {
+                        _themeController.setTheme(
+                            value == true ? ETheme.dark : ETheme.light);
+                      }
+                    },
+                  ),
+                  title: const Text("Tema escuro"),
+                );
+              },
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Todos"),
