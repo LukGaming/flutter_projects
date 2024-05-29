@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _themeController = GetIt.instance<ThemeController>();
-    ETheme theme = ETheme.light;
     return SizedBox.shrink(
       child: ListenableBuilder(
         listenable: _themeController,
@@ -29,10 +28,6 @@ class MyApp extends StatelessWidget {
             theme: _themeController.theme == ETheme.light
                 ? ThemeData.light()
                 : ThemeData.dark(),
-            // theme: ThemeData(
-            //   // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            //   useMaterial3: false,
-            // ),
             home: const TodosPage(),
           );
         },
