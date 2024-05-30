@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class MultiListenableBuilder extends StatefulWidget {
@@ -19,6 +21,11 @@ class _MultiListenableBuilderState extends State<MultiListenableBuilder> {
   @override
   void initState() {
     // TODO: implement initState
+
+    // runZoned(() => widget.builder(context));
+
+    // final inherited = context.dependOnInheritedWidgetOfExactType<Listenable>();
+    // print(inherited);
     addListeners();
     super.initState();
   }
