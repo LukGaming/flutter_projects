@@ -8,17 +8,28 @@ import 'package:object_box/pages/todo_page.dart';
 void main() async {
   await injector();
 
-  runApp(
-    const MyApp(),
-  );
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _themeController = GetIt.instance<ThemeController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _themeController.getTheme();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final _themeController = GetIt.instance<ThemeController>();
     return SizedBox.shrink(
       child: ListenableBuilder(
         listenable: _themeController,
