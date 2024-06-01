@@ -3,13 +3,13 @@ import 'package:chat_app/models/message.dart';
 
 class UsersChatMessage {
   int id;
-  int user1Id;
-  int user2Id;
+  int sentFromUserId;
+  int sentToUserId;
   List<Message> messages;
   UsersChatMessage({
     required this.id,
     required this.messages,
-    required this.user1Id,
-    required this.user2Id,
+    required this.sentFromUserId,
+    required this.sentToUserId,
   });
 }

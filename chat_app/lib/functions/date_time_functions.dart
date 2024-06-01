@@ -1,3 +1,3 @@
-String convertDateTimeToString(DateTime date) {
-  return "${date.hour} : ${date.minute}";
+String convertDateTimeToHourAndMinutesString(DateTime date) {
+  return "${date.hour}:${date.minute}";
 }

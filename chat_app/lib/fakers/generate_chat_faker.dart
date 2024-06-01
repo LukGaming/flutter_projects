@@ -23,33 +23,30 @@ List<UsersChatMessage> createFakeUserChatMessage() {
 
   List<Message> messages = [];
 
-  final firstMessage = Message(
-    id: 1,
-    sendToUserId: users[0].id,
-    sendFromUserId: users[1].id,
-    bodyText: Faker().lorem.random.string(500),
-    messageFiles: [],
-    sentTime: DateTime.now(),
-  );
-
-  final secondMessage = Message(
-    id: 2,
-    sendToUserId: users[1].id,
-    sendFromUserId: users[0].id,
-    bodyText: Faker().lorem.random.string(500),
-    sentTime: DateTime.now().add(const Duration(seconds: -1)),
-    messageFiles: [],
-  );
-
-  messages.addAll([
-    firstMessage,
-    secondMessage,
-  ]);
+  for (int i = 0; i < 10; i++) {
+    final firstMessage = Message(
+      id: 1,
+      sendToUserId: users[0].id,
+      sendFromUserId: users[1].id,
+      bodyText: Faker().lorem.random.string(500),
+      messageFiles: [],
+      sentTime: Faker().date.dateTime(),
+    );
+    final secondMessage = Message(
+      id: 2,
+      sendToUserId: users[1].id,
+      sendFromUserId: users[0].id,
+      bodyText: Faker().lorem.random.string(500),
+      sentTime: Faker().date.dateTime(),
+      messageFiles: [],
+    );
+    messages.addAll([firstMessage, secondMessage]);
+  }
 
   final firstChat = UsersChatMessage(
     id: 1,
-    user1Id: users[0].id,
-    user2Id: users[1].id,
+    sentFromUserId: users[0].id,
+    sentToUserId: users[1].id,
     messages: messages,
   );
 
