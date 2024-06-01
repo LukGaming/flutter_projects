@@ -1,7 +1,7 @@
 import 'package:chat_app/models/message.dart';
 import 'package:chat_app/models/user.dart';
 import 'package:chat_app/models/users_chat_message.dart';
-import 'package:chat_app/user_chat_messages/chat_message_card.dart';
+import 'package:chat_app/widgets/user_chat_messages/chat_message_card.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -70,7 +70,7 @@ class _IndividualChatPageState extends State<IndividualChatPage> {
       sendToUserId: users[1].id,
       sendFromUserId: users[0].id,
       bodyText: "Bom dia, tudo bem sim, e contigo?",
-      sentTime: DateTime.now().add(const Duration(seconds: 1)),
+      sentTime: DateTime.now().add(const Duration(seconds: -1)),
       messageFiles: [],
     );
 
@@ -95,6 +95,7 @@ class _IndividualChatPageState extends State<IndividualChatPage> {
       body: ListView.builder(
         itemBuilder: (context, index) {
           final chatMessage = chatMessages[index];
+          //TODO: trocar para usuário real
           final currentLoggedUser =
               users.where((element) => element.id == loggedUserId).first;
 

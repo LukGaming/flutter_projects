@@ -1,7 +1,8 @@
 import 'package:chat_app/functions/date_time_functions.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:chat_app/models/user.dart';
-import 'package:chat_app/user_chat_messages/show_user_profile_image_card.dart';
+import 'package:chat_app/widgets/messages/message_screen.dart';
+import 'package:chat_app/widgets/user_chat_messages/show_user_profile_image_card.dart';
 import 'package:flutter/material.dart';
 
 class UsersChatMessageCard extends StatefulWidget {
@@ -33,7 +34,18 @@ class _UsersChatMessageCardState extends State<UsersChatMessageCard> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: ShowUserProfileImageCard(user: widget.sentToUser),
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => MessagePageScreen(
+            chatWithUser: widget.sentToUser,
+            messages: widget.messages,
+          ),
+        ),
+      ),
+      leading: Hero(
+        tag: widget.sentToUser.id.toString,
+        child: ShowUserProfileImageCard(user: widget.sentToUser),
+      ),
       title: Text(widget.sentToUser.name),
       subtitle: Text(
         lastMessage != null ? lastMessage!.bodyText : "",
