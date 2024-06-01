@@ -41,7 +41,7 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
             final message = orderedMessages[index];
             bool isCurrentUserMessage =
                 widget.chatWithUser.id == message.sendFromUserId;
-            return Row(
+            return Column(
               mainAxisAlignment: isCurrentUserMessage
                   ? MainAxisAlignment.end
                   : MainAxisAlignment.start,

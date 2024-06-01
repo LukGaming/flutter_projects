@@ -20,7 +20,10 @@ class MessageWidget extends StatelessWidget {
         color: isRight ? Colors.red : Colors.blue,
       ),
       padding: const EdgeInsets.all(20),
-      child: Text(message.bodyText),
+      child: Text(
+        message.bodyText,
+        overflow: TextOverflow.clip,
+      ),
     );
   }
 }
