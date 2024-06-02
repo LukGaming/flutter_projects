@@ -7,7 +7,7 @@ class Message {
   int sendFromUserId;
   String bodyText;
   List<MessageFile> messageFiles;
-  DateTime sentTime;
+  DateTime cratedAt;
   bool isSent;
   bool received;
   bool seen;
@@ -17,20 +17,14 @@ class Message {
     required this.sendFromUserId,
     required this.bodyText,
     required this.messageFiles,
-    required this.sentTime,
+    required this.cratedAt,
     required this.isSent,
     required this.received,
     required this.seen,
   });
 
-  @override
-  String toString() {
-    // TODO: implement toString
-    return super.toString();
-  }
-
   String printMessageStatus() {
-    return "isSent: ${isSent}, isReceived: ${received}, seen: ${seen}";
+    return "isSent: $isSent, isReceived: $received, seen: $seen";
   }
 
   Message notSentMessageCopyWith() {
@@ -40,7 +34,7 @@ class Message {
       sendFromUserId: sendFromUserId,
       bodyText: bodyText,
       messageFiles: messageFiles,
-      sentTime: sentTime,
+      cratedAt: cratedAt,
       isSent: false,
       received: false,
       seen: false,
@@ -54,7 +48,7 @@ class Message {
       sendFromUserId: sendFromUserId,
       bodyText: bodyText,
       messageFiles: messageFiles,
-      sentTime: sentTime,
+      cratedAt: cratedAt,
       isSent: true,
       received: false,
       seen: false,
@@ -68,7 +62,7 @@ class Message {
       sendFromUserId: sendFromUserId,
       bodyText: bodyText,
       messageFiles: messageFiles,
-      sentTime: sentTime,
+      cratedAt: cratedAt,
       isSent: true,
       received: true,
       seen: false,
@@ -82,7 +76,7 @@ class Message {
       sendFromUserId: sendFromUserId,
       bodyText: bodyText,
       messageFiles: messageFiles,
-      sentTime: sentTime,
+      cratedAt: cratedAt,
       isSent: true,
       received: true,
       seen: true,

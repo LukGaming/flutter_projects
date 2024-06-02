@@ -21,7 +21,7 @@ class _LastMessageTimeState extends State<LastMessageTime> {
     super.initState();
 
     lastMessageDate = widget.lastMessage != null
-        ? convertDateTimeToHourAndMinutesString(widget.lastMessage!.sentTime)
+        ? convertDateTimeToHourAndMinutesString(widget.lastMessage!.cratedAt)
         : "";
   }
 

@@ -29,7 +29,7 @@ class _UsersChatMessageCardState extends State<UsersChatMessageCard> {
     super.initState();
     if (widget.messages.isNotEmpty) {
       List<Message> messages = widget.messages;
-      messages.sort((a, b) => b.sentTime.compareTo(a.sentTime));
+      messages.sort((a, b) => b.cratedAt.compareTo(a.cratedAt));
       lastMessage = messages.last;
     }
   }

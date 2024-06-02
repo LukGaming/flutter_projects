@@ -43,7 +43,7 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
                 .first;
             final orderedMessages = userChatMessages.messages;
 
-            orderedMessages.sort((a, b) => b.sentTime.compareTo(a.sentTime));
+            orderedMessages.sort((a, b) => b.cratedAt.compareTo(a.cratedAt));
 
             return Column(
               children: [

@@ -10,7 +10,6 @@ EMessageStatus getMessageStatusFromMessage(Message message) {
 }
 
 bool notSentMessage(Message message) {
-  print(message.printMessageStatus());
   return !message.isSent && !message.received && !message.seen;
 }
 

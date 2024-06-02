@@ -31,6 +31,9 @@ class MessageWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                if (message.messageFiles.isNotEmpty)
+                  for (int i = 0; i < message.messageFiles.length; i++)
+                    Text(message.messageFiles[i].localStoragePath.toString()),
                 Text(
                   message.bodyText,
                   style: TextStyle(
@@ -44,7 +47,7 @@ class MessageWidget extends StatelessWidget {
                   children: [
                     Text(
                       convertDateTimeToHourAndMinutesString(
-                        message.sentTime,
+                        message.cratedAt,
                       ),
                     ),
                     isMyMessage
