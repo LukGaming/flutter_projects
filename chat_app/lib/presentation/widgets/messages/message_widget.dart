@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:chat_app/functions/date_time_functions.dart';
-import 'package:chat_app/functions/message_state.dart';
-import 'package:chat_app/functions/status_message_status_icon.dart';
+import 'package:chat_app/presentation/functions/date_time_functions.dart';
+import 'package:chat_app/presentation/functions/message_state.dart';
+import 'package:chat_app/presentation/functions/status_message_status_icon.dart';
 import 'package:chat_app/infrastructure/dto/message.dart';
-import 'package:chat_app/theme/colors.dart';
+import 'package:chat_app/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 

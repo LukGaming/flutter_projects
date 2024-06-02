@@ -1,5 +1,5 @@
-import 'package:chat_app/controllers/chat_messages_controller.dart';
-import 'package:chat_app/widgets/user_chat_messages/chat_message_card.dart';
+import 'package:chat_app/presentation/controllers/chat_messages_controller.dart';
+import 'package:chat_app/presentation/widgets/user_chat_messages/chat_message_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 

@@ -1,4 +1,4 @@
-import 'package:chat_app/controllers/chat_messages_controller.dart';
+import 'package:chat_app/presentation/controllers/chat_messages_controller.dart';
 import 'package:chat_app/domains/logic/message_sender_logic.dart';
 import 'package:chat_app/domains/services/check_internet_connection_service.dart';
 import 'package:get_it/get_it.dart';

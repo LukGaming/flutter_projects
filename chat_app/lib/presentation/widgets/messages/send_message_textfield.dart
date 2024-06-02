@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:chat_app/controllers/chat_messages_controller.dart';
+import 'package:chat_app/presentation/controllers/chat_messages_controller.dart';
 import 'package:chat_app/infrastructure/dto/user.dart';
 import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
-import 'package:chat_app/theme/colors.dart';
+import 'package:chat_app/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';

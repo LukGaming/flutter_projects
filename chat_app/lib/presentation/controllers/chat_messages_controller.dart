@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:chat_app/fakers/generate_chat_faker.dart';
-import 'package:chat_app/functions/message_state.dart';
+import 'package:chat_app/utilities/fakers/generate_chat_faker.dart';
+import 'package:chat_app/presentation/functions/message_state.dart';
 import 'package:chat_app/infrastructure/dto/message.dart';
 import 'package:chat_app/infrastructure/dto/message_file.dart';
 import 'package:chat_app/infrastructure/dto/user.dart';

@@ -1,10 +1,10 @@
-import 'package:chat_app/controllers/chat_messages_controller.dart';
+import 'package:chat_app/presentation/controllers/chat_messages_controller.dart';
 import 'package:chat_app/infrastructure/dto/message.dart';
 import 'package:chat_app/infrastructure/dto/user.dart';
 import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
-import 'package:chat_app/widgets/messages/message_screen_appbar.dart';
-import 'package:chat_app/widgets/messages/message_widget.dart';
-import 'package:chat_app/widgets/messages/send_message_textfield.dart';
+import 'package:chat_app/presentation/widgets/messages/message_screen_appbar.dart';
+import 'package:chat_app/presentation/widgets/messages/message_widget.dart';
+import 'package:chat_app/presentation/widgets/messages/send_message_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 

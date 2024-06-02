@@ -1,4 +1,4 @@
-import 'package:chat_app/theme/sizes.dart';
+import 'package:chat_app/presentation/theme/sizes.dart';
 import 'package:flutter/material.dart';
 
 const notSentMessageIcon = Icon(

@@ -1,5 +1,5 @@
 import 'package:chat_app/infrastructure/dto/user.dart';
-import 'package:chat_app/widgets/user_chat_messages/show_user_profile_image_card.dart';
+import 'package:chat_app/presentation/widgets/user_chat_messages/show_user_profile_image_card.dart';
 import 'package:flutter/material.dart';
 
 class ChatAppBar extends StatelessWidget {
