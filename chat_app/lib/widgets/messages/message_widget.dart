@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:chat_app/functions/date_time_functions.dart';
 import 'package:chat_app/functions/message_state.dart';
 import 'package:chat_app/functions/status_message_status_icon.dart';
@@ -33,7 +35,7 @@ class MessageWidget extends StatelessWidget {
               children: [
                 if (message.messageFiles.isNotEmpty)
                   for (int i = 0; i < message.messageFiles.length; i++)
-                    Text(message.messageFiles[i].localStoragePath.toString()),
+                    Image.file(File(message.messageFiles[i].localStoragePath!)),
                 Text(
                   message.bodyText,
                   style: TextStyle(
