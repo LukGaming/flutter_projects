@@ -1,6 +1,7 @@
 import 'package:chat_app/controllers/chat_messages_controller.dart';
 import 'package:chat_app/models/user.dart';
 import 'package:chat_app/models/users_chat_message.dart';
+import 'package:chat_app/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -28,9 +29,9 @@ class _SendMessageTextFieldWidgetState
     return Container(
       padding: const EdgeInsets.all(5),
       margin: const EdgeInsets.all(5),
-      decoration: const BoxDecoration(
-          color: Colors.purpleAccent,
-          borderRadius: BorderRadius.all(Radius.circular(5))),
+      decoration: BoxDecoration(
+          color: textFieldBackgroundColor,
+          borderRadius: const BorderRadius.all(Radius.circular(5))),
       child: TextFormField(
         controller: _chatMessageController.textController,
         decoration: InputDecoration(

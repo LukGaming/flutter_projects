@@ -42,10 +42,8 @@ class ChatMessagesController extends ChangeNotifier {
 
     int chatMessageIndex =
         chatMessages.indexWhere((element) => element.id == chatMessage.id);
-    chatMessages[chatMessageIndex].messages = [
-      newMessage,
-      ...chatMessages[chatMessageIndex].messages,
-    ];
+
+    chatMessages[chatMessageIndex].messages.add(newMessage);
 
     textController.clear();
 

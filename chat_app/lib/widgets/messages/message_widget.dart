@@ -1,5 +1,6 @@
 import 'package:chat_app/functions/date_time_functions.dart';
 import 'package:chat_app/models/message.dart';
+import 'package:chat_app/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class MessageWidget extends StatelessWidget {
@@ -20,7 +21,7 @@ class MessageWidget extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
-              color: isRight ? Colors.red : Colors.blue,
+              color: isRight ? rightContainerColor : leftContainerColor,
             ),
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -29,7 +30,11 @@ class MessageWidget extends StatelessWidget {
               children: [
                 Text(
                   message.bodyText,
-                  // textAlign: TextAlign.right,
+                  style: TextStyle(
+                    color: isRight
+                        ? rightContainerTextColor
+                        : leftContainerTextColor,
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

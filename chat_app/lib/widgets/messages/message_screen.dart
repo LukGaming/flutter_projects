@@ -30,14 +30,14 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF0F0F0),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100.0),
+        preferredSize: const Size.fromHeight(50.0),
         child: ChatAppBar(chatWithUser: widget.chatWithUser),
       ),
       body: ListenableBuilder(
           listenable: _chatMessageController,
           builder: (_, __) {
-            print("Sorteando novamente");
             final userChatMessages = _chatMessageController.chatMessages
                 .where(
                     (element) => element.sentToUserId == widget.chatWithUser.id)
@@ -68,8 +68,14 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
                           children: [
                             Padding(
                               padding: isMyMessage
-                                  ? const EdgeInsets.only(left: 30, top: 10)
-                                  : const EdgeInsets.only(right: 30, top: 10),
+                                  ? EdgeInsets.only(
+                                      left:
+                                          MediaQuery.of(context).size.width / 5,
+                                      top: 10)
+                                  : EdgeInsets.only(
+                                      right:
+                                          MediaQuery.of(context).size.width / 5,
+                                      top: 10),
                               child: MessageWidget(
                                 message: message,
                                 isRight: isMyMessage,
