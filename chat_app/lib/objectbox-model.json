@@ -1,0 +1,171 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5105723551177742776",
+      "lastPropertyId": "8:2255836969165309841",
+      "name": "MessageEntity",
+      "properties": [
+        {
+          "id": "1:2162967265791506512",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8434176561336891224",
+          "name": "sendToUserId",
+          "type": 6
+        },
+        {
+          "id": "3:7415871747408015527",
+          "name": "sendFromUserId",
+          "type": 6
+        },
+        {
+          "id": "4:2969915044552207899",
+          "name": "bodyText",
+          "type": 9
+        },
+        {
+          "id": "5:205571134376105796",
+          "name": "cratedAt",
+          "type": 10
+        },
+        {
+          "id": "6:2024196239746942964",
+          "name": "isSent",
+          "type": 1
+        },
+        {
+          "id": "7:8543442749714650151",
+          "name": "received",
+          "type": 1
+        },
+        {
+          "id": "8:2255836969165309841",
+          "name": "seen",
+          "type": 1
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:8655038270554466679",
+          "name": "messageFiles",
+          "targetId": "2:2609461332105018288"
+        }
+      ]
+    },
+    {
+      "id": "2:2609461332105018288",
+      "lastPropertyId": "6:4895098184983414293",
+      "name": "MessageFileEntity",
+      "properties": [
+        {
+          "id": "1:7902520714246596995",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6702557496330440045",
+          "name": "serverSrc",
+          "type": 9
+        },
+        {
+          "id": "3:6705534825544678613",
+          "name": "downloadedToLocalStorage",
+          "type": 1
+        },
+        {
+          "id": "4:7387847565092783794",
+          "name": "localStoragePath",
+          "type": 9
+        },
+        {
+          "id": "5:2241156219489643846",
+          "name": "messageId",
+          "type": 6
+        },
+        {
+          "id": "6:4895098184983414293",
+          "name": "sentToServer",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:3989306209226767090",
+      "lastPropertyId": "4:8625319659857310688",
+      "name": "UserEntity",
+      "properties": [
+        {
+          "id": "1:5329374772252227906",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:8606472576436181012",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:6107119431783381616",
+          "name": "email",
+          "type": 9
+        },
+        {
+          "id": "4:8625319659857310688",
+          "name": "profileImageUrl",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:7815535746756623991",
+      "lastPropertyId": "3:3422250621684663502",
+      "name": "UsersChatMessageEntity",
+      "properties": [
+        {
+          "id": "1:6780552912958917304",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:703644910920525448",
+          "name": "sentFromUserId",
+          "type": 6
+        },
+        {
+          "id": "3:3422250621684663502",
+          "name": "sentToUserId",
+          "type": 6
+        }
+      ],
+      "relations": [
+        {
+          "id": "2:3698727659471119717",
+          "name": "messages",
+          "targetId": "1:5105723551177742776"
+        }
+      ]
+    }
+  ],
+  "lastEntityId": "4:7815535746756623991",
+  "lastIndexId": "0:0",
+  "lastRelationId": "2:3698727659471119717",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
