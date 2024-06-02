@@ -1,4 +1,4 @@
-import 'package:chat_app/models/user.dart';
+import 'package:chat_app/infrastructure/dto/user.dart';
 import 'package:flutter/material.dart';
 
 class ShowUserProfileImageCard extends StatelessWidget {

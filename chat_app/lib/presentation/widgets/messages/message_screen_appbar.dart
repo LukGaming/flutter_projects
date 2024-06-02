@@ -1,4 +1,4 @@
-import 'package:chat_app/models/user.dart';
+import 'package:chat_app/infrastructure/dto/user.dart';
 import 'package:chat_app/widgets/user_chat_messages/show_user_profile_image_card.dart';
 import 'package:flutter/material.dart';
 

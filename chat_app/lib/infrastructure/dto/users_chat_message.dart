@@ -1,5 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:chat_app/models/message.dart';
+import 'package:chat_app/infrastructure/dto/message.dart';
 
 class UsersChatMessage {
   int id;

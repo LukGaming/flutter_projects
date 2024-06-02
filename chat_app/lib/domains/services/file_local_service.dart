@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:chat_app/models/message_file.dart';
+import 'package:chat_app/infrastructure/dto/message_file.dart';
 
 abstract class IFileLocalService {
   Future<List<MessageFile>> saveMessageFilesLocaly(List<MessageFile> files);

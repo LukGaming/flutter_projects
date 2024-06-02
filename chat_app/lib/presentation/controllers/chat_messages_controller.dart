@@ -3,10 +3,10 @@ import 'dart:math';
 
 import 'package:chat_app/fakers/generate_chat_faker.dart';
 import 'package:chat_app/functions/message_state.dart';
-import 'package:chat_app/models/message.dart';
-import 'package:chat_app/models/message_file.dart';
-import 'package:chat_app/models/user.dart';
-import 'package:chat_app/models/users_chat_message.dart';
+import 'package:chat_app/infrastructure/dto/message.dart';
+import 'package:chat_app/infrastructure/dto/message_file.dart';
+import 'package:chat_app/infrastructure/dto/user.dart';
+import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
 import 'package:flutter/material.dart';
 
 class ChatMessagesController extends ChangeNotifier {

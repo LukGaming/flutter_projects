@@ -1,4 +1,4 @@
-import 'package:chat_app/models/message.dart';
+import 'package:chat_app/infrastructure/dto/message.dart';
 
 enum EMessageStatus { notSent, sent, received, seen }
 
