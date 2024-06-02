@@ -23,26 +23,44 @@ List<UsersChatMessage> createFakeUserChatMessage() {
 
   List<Message> messages = [];
 
-  for (int i = 0; i < 10; i++) {
-    var firstMessage = Message(
-      id: i,
-      sendToUserId: users[0].id,
-      sendFromUserId: users[1].id,
-      bodyText: Faker().lorem.random.string(500),
-      messageFiles: [],
-      sentTime: DateTime.now(),
-    );
+  // for (int i = 0; i < 10; i++) {
+  var firstMessage = Message(
+    id: 0,
+    sendToUserId: users[0].id,
+    sendFromUserId: users[1].id,
+    bodyText: Faker().lorem.random.string(500),
+    messageFiles: [],
+    sentTime: DateTime.now(),
+    isSent: true,
+    received: true,
+    seen: true,
+  );
 
-    var secondMessage = Message(
-      id: i,
-      sendToUserId: users[1].id,
-      sendFromUserId: users[0].id,
-      bodyText: Faker().lorem.random.string(500),
-      sentTime: DateTime.now(),
-      messageFiles: [],
-    );
-    messages.addAll([firstMessage, secondMessage]);
-  }
+  var secondMessage = Message(
+    id: 1,
+    sendToUserId: users[1].id,
+    sendFromUserId: users[0].id,
+    bodyText: Faker().lorem.random.string(500),
+    sentTime: DateTime.now(),
+    messageFiles: [],
+    isSent: true,
+    received: true,
+    seen: false,
+  );
+
+  var thirdMessage = Message(
+    id: 2,
+    sendToUserId: users[1].id,
+    sendFromUserId: users[0].id,
+    bodyText: Faker().lorem.random.string(500),
+    sentTime: DateTime.now(),
+    messageFiles: [],
+    isSent: true,
+    received: true,
+    seen: false,
+  );
+  messages.addAll([firstMessage, secondMessage, thirdMessage]);
+  // }
 
   final firstChat = UsersChatMessage(
     id: 1,

@@ -15,6 +15,7 @@ Color leftContainerTextColor = const Color(0xFF0D47A1);
 Color textFieldBackgroundColor = const Color.fromARGB(255, 123, 165, 126);
 
 ThemeData lightTheme = ThemeData.light().copyWith(
+  scaffoldBackgroundColor: Colors.grey,
   textTheme: TextTheme(
     bodyLarge: TextStyle(color: textColor),
     bodyMedium: TextStyle(

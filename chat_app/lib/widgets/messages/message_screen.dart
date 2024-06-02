@@ -30,7 +30,6 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F0F0),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50.0),
         child: ChatAppBar(chatWithUser: widget.chatWithUser),
@@ -58,8 +57,6 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
                         bool isMyMessage =
                             _chatMessageController.loggedUserId ==
                                 message.sendFromUserId;
-                        print(
-                            "My message? : ${isMyMessage} ${message.bodyText}");
 
                         return Column(
                           crossAxisAlignment: isMyMessage
@@ -78,7 +75,7 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
                                       top: 10),
                               child: MessageWidget(
                                 message: message,
-                                isRight: isMyMessage,
+                                isMyMessage: isMyMessage,
                               ),
                             )
                           ],

@@ -38,6 +38,9 @@ class ChatMessagesController extends ChangeNotifier {
       bodyText: bodyText,
       messageFiles: [],
       sentTime: hourSent,
+      isSent: true,
+      received: false,
+      seen: false,
     );
 
     int chatMessageIndex =

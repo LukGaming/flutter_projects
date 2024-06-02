@@ -8,6 +8,9 @@ class Message {
   String bodyText;
   List<MessageFile> messageFiles;
   DateTime sentTime;
+  bool isSent;
+  bool received;
+  bool seen;
   Message({
     required this.id,
     required this.sendToUserId,
@@ -15,5 +18,8 @@ class Message {
     required this.bodyText,
     required this.messageFiles,
     required this.sentTime,
+    required this.isSent,
+    required this.received,
+    required this.seen,
   });
 }
