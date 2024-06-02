@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:chat_app/fakers/generate_chat_faker.dart';
+import 'package:chat_app/functions/message_state.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:chat_app/models/user.dart';
 import 'package:chat_app/models/users_chat_message.dart';
@@ -38,7 +39,7 @@ class ChatMessagesController extends ChangeNotifier {
       bodyText: bodyText,
       messageFiles: [],
       sentTime: hourSent,
-      isSent: true,
+      isSent: false,
       received: false,
       seen: false,
     );
@@ -46,7 +47,13 @@ class ChatMessagesController extends ChangeNotifier {
     int chatMessageIndex =
         chatMessages.indexWhere((element) => element.id == chatMessage.id);
 
-    chatMessages[chatMessageIndex].messages.add(newMessage);
+    Message newMessageStatus = newMessage.notSentMessageCopyWith();
+
+    chatMessages[chatMessageIndex].messages.add(newMessageStatus);
+
+    print(newMessageStatus.printMessageStatus());
+
+    print(getMessageStatusFromMessage(newMessageStatus));
 
     textController.clear();
 

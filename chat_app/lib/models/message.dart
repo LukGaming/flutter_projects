@@ -22,4 +22,70 @@ class Message {
     required this.received,
     required this.seen,
   });
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return super.toString();
+  }
+
+  String printMessageStatus() {
+    return "isSent: ${isSent}, isReceived: ${received}, seen: ${seen}";
+  }
+
+  Message notSentMessageCopyWith() {
+    return Message(
+      id: id,
+      sendToUserId: sendToUserId,
+      sendFromUserId: sendFromUserId,
+      bodyText: bodyText,
+      messageFiles: messageFiles,
+      sentTime: sentTime,
+      isSent: false,
+      received: false,
+      seen: false,
+    );
+  }
+
+  Message sentMessageCopyWith() {
+    return Message(
+      id: id,
+      sendToUserId: sendToUserId,
+      sendFromUserId: sendFromUserId,
+      bodyText: bodyText,
+      messageFiles: messageFiles,
+      sentTime: sentTime,
+      isSent: true,
+      received: false,
+      seen: false,
+    );
+  }
+
+  Message receivedMessageCopyWith() {
+    return Message(
+      id: id,
+      sendToUserId: sendToUserId,
+      sendFromUserId: sendFromUserId,
+      bodyText: bodyText,
+      messageFiles: messageFiles,
+      sentTime: sentTime,
+      isSent: true,
+      received: true,
+      seen: false,
+    );
+  }
+
+  Message seenMessageCopyWith() {
+    return Message(
+      id: id,
+      sendToUserId: sendToUserId,
+      sendFromUserId: sendFromUserId,
+      bodyText: bodyText,
+      messageFiles: messageFiles,
+      sentTime: sentTime,
+      isSent: true,
+      received: true,
+      seen: true,
+    );
+  }
 }
