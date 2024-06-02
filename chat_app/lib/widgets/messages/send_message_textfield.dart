@@ -21,7 +21,6 @@ class SendMessageTextFieldWidget extends StatefulWidget {
 
 class _SendMessageTextFieldWidgetState
     extends State<SendMessageTextFieldWidget> {
-  final _messageController = TextEditingController();
   final _chatMessageController = GetIt.instance<ChatMessagesController>();
 
   @override
@@ -33,7 +32,7 @@ class _SendMessageTextFieldWidgetState
           color: Colors.purpleAccent,
           borderRadius: BorderRadius.all(Radius.circular(5))),
       child: TextFormField(
-        controller: _messageController,
+        controller: _chatMessageController.textController,
         decoration: InputDecoration(
           hintText: "Digite uma mensagem",
           suffixIcon: InkWell(
@@ -41,7 +40,7 @@ class _SendMessageTextFieldWidgetState
             onTap: () {
               _chatMessageController.sendMessage(
                 toUser: widget.chatWithUser,
-                bodyText: _messageController.text,
+                bodyText: _chatMessageController.textController.text,
                 hourSent: DateTime.now(),
                 chatMessage: widget.chatMessage,
               );

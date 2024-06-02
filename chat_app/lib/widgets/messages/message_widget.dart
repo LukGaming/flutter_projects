@@ -13,26 +13,39 @@ class MessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(5)),
-        color: isRight ? Colors.red : Colors.blue,
-      ),
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Text(
-            message.bodyText,
-            overflow: TextOverflow.clip,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        IntrinsicWidth(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
+              color: isRight ? Colors.red : Colors.blue,
+            ),
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  message.bodyText,
+                  // textAlign: TextAlign.right,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      convertDateTimeToHourAndMinutesString(
+                        message.sentTime,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(convertDateTimeToHourAndMinutesString(message.sentTime)),
-            ],
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

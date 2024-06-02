@@ -7,6 +7,7 @@ import 'package:chat_app/models/users_chat_message.dart';
 import 'package:flutter/material.dart';
 
 class ChatMessagesController extends ChangeNotifier {
+  TextEditingController textController = TextEditingController();
   final loggedUserId = 0;
   List<UsersChatMessage> chatMessages = createFakeUserChatMessage();
   List<User> users = [
@@ -41,8 +42,13 @@ class ChatMessagesController extends ChangeNotifier {
 
     int chatMessageIndex =
         chatMessages.indexWhere((element) => element.id == chatMessage.id);
-    chatMessages[chatMessageIndex].messages.add(newMessage);
-    print("Adicionando nova mensagem");
+    chatMessages[chatMessageIndex].messages = [
+      newMessage,
+      ...chatMessages[chatMessageIndex].messages,
+    ];
+
+    textController.clear();
+
     notifyListeners();
   }
 }

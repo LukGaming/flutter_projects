@@ -5,7 +5,6 @@ import 'package:chat_app/models/users_chat_message.dart';
 import 'package:chat_app/widgets/messages/message_screen_appbar.dart';
 import 'package:chat_app/widgets/messages/message_widget.dart';
 import 'package:chat_app/widgets/messages/send_message_textfield.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -38,13 +37,14 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
       body: ListenableBuilder(
           listenable: _chatMessageController,
           builder: (_, __) {
+            print("Sorteando novamente");
             final userChatMessages = _chatMessageController.chatMessages
                 .where(
                     (element) => element.sentToUserId == widget.chatWithUser.id)
                 .first;
             final orderedMessages = userChatMessages.messages;
 
-            orderedMessages.sort((a, b) => a.sentTime.compareTo(b.sentTime));
+            orderedMessages.sort((a, b) => b.sentTime.compareTo(a.sentTime));
 
             return Column(
               children: [
@@ -55,20 +55,24 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
                       itemBuilder: (context, index) {
                         final message = orderedMessages[index];
 
-                        bool isCurrentUserMessage =
-                            widget.chatWithUser.id == message.sendFromUserId;
+                        bool isMyMessage =
+                            _chatMessageController.loggedUserId ==
+                                message.sendFromUserId;
+                        print(
+                            "My message? : ${isMyMessage} ${message.bodyText}");
+
                         return Column(
-                          mainAxisAlignment: isCurrentUserMessage
-                              ? MainAxisAlignment.end
-                              : MainAxisAlignment.start,
+                          crossAxisAlignment: isMyMessage
+                              ? CrossAxisAlignment.end
+                              : CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: isCurrentUserMessage
+                              padding: isMyMessage
                                   ? const EdgeInsets.only(left: 30, top: 10)
                                   : const EdgeInsets.only(right: 30, top: 10),
                               child: MessageWidget(
                                 message: message,
-                                isRight: isCurrentUserMessage,
+                                isRight: isMyMessage,
                               ),
                             )
                           ],
