@@ -2,7 +2,6 @@ import 'package:chat_app/infrastructure/dto/message.dart';
 import 'package:chat_app/infrastructure/dto/user.dart';
 import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
 import 'package:faker/faker.dart';
-import 'package:objectbox/objectbox.dart';
 
 List<UsersChatMessage> createFakeUserChatMessage() {
   List<UsersChatMessage> chatMessages = [];

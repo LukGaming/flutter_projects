@@ -1,15 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 import 'dart:math';
 
-import 'package:chat_app/utilities/fakers/generate_chat_faker.dart';
-import 'package:chat_app/presentation/functions/message_state.dart';
+import 'package:flutter/material.dart';
+
+import 'package:chat_app/domains/logic/message_sender_logic.dart';
 import 'package:chat_app/infrastructure/dto/message.dart';
 import 'package:chat_app/infrastructure/dto/message_file.dart';
 import 'package:chat_app/infrastructure/dto/user.dart';
 import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
-import 'package:flutter/material.dart';
+import 'package:chat_app/presentation/functions/message_state.dart';
+import 'package:chat_app/utilities/fakers/generate_chat_faker.dart';
 
 class ChatMessagesController extends ChangeNotifier {
+  final MessagesLogic messagesLogic;
+  ChatMessagesController(this.messagesLogic);
+
   TextEditingController textController = TextEditingController();
   void startListeningToTextController() {
     textController = TextEditingController();
