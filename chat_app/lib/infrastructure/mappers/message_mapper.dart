@@ -6,7 +6,7 @@ import 'package:chat_app/infrastructure/mappers/message_file_mapper.dart';
 import 'package:objectbox/objectbox.dart';
 
 class MessageMapper {
-  static Message toMessage(MessageEntity messageEntity) {
+  static Message fromEntity(MessageEntity messageEntity) {
     List<MessageFile> messageFiles = messageEntity.messageFiles
         .map((element) => MessageFileMapper.toMessageFile(element))
         .toList();

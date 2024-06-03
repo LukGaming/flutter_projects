@@ -14,10 +14,8 @@ class ChatAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       actions: const [
-        Icon(Icons.remove),
-        Icon(Icons.add),
-        Icon(Icons.add),
-        Icon(Icons.add),
+        Icon(Icons.settings),
+
       ],
       leading: Row(
         children: [

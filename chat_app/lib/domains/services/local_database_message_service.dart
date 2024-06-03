@@ -1,21 +1,37 @@
 import 'package:chat_app/domains/entities/message_entity.dart';
+import 'package:chat_app/domains/logic/chat_user_messages_logic.dart';
 import 'package:chat_app/domains/repositories/message_repository.dart';
 import 'package:chat_app/infrastructure/dto/message.dart';
+import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
 import 'package:chat_app/infrastructure/mappers/message_mapper.dart';
-import 'package:objectbox/objectbox.dart';
+import 'package:chat_app/infrastructure/mappers/user_chat_message_mapper.dart';
 
 abstract class IMessageService {
   Future<Message> saveMessage(Message message);
+
+  Future<List<Message>> getMessagesFromUserChat(
+    UsersChatMessage userChatMessage,
+  );
 }
 
 class MessageService implements IMessageService {
-  final IMessageRepository localDatabaseRepository;
+  final IMessageRepository messageRepository;
 
-  MessageService(this.localDatabaseRepository);
+  MessageService(this.messageRepository);
   @override
   Future<Message> saveMessage(Message message) async {
     final MessageEntity createdMessage =
-        await localDatabaseRepository.save(MessageMapper.toEntity(message));
-    return MessageMapper.toMessage(createdMessage);
+        await messageRepository.save(MessageMapper.toEntity(message));
+    return MessageMapper.fromEntity(createdMessage);
+  }
+
+  @override
+  Future<List<Message>> getMessagesFromUserChat(
+    UsersChatMessage userChatMessage,
+  ) async {
+    List<MessageEntity> messagesEntities =
+        await messageRepository.getMessagesFromUsersChat(
+            UserChatMessageMapper.toEntity(userChatMessage));
+    return messagesEntities.map((e) => MessageMapper.fromEntity(e)).toList();
   }
 }
