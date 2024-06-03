@@ -13,4 +13,9 @@ class MessageFile {
     required this.messageId,
     required this.sentToServer,
   });
+
+  @override
+  String toString() {
+    return 'MessageFile(id: $id, serverSrc: $serverSrc, downloadedToLocalStorage: $downloadedToLocalStorage, localStoragePath: $localStoragePath, messageId: $messageId, sentToServer: $sentToServer)';
+  }
 }

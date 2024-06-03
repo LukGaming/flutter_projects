@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chat_app/infrastructure/dto/message.dart';
 
 class UsersChatMessage {
@@ -11,4 +12,18 @@ class UsersChatMessage {
     required this.sentFromUserId,
     required this.sentToUserId,
   });
+
+  UsersChatMessage copyWith({
+    int? id,
+    int? sentFromUserId,
+    int? sentToUserId,
+    List<Message>? messages,
+  }) {
+    return UsersChatMessage(
+      id: id ?? this.id,
+      sentFromUserId: sentFromUserId ?? this.sentFromUserId,
+      sentToUserId: sentToUserId ?? this.sentToUserId,
+      messages: messages ?? this.messages,
+    );
+  }
 }

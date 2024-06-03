@@ -2,21 +2,43 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:chat_app/domains/logic/chat_user_messages_logic.dart';
 import 'package:flutter/material.dart';
 
-import 'package:chat_app/domains/logic/message_sender_logic.dart';
+import 'package:chat_app/domains/logic/message_logic.dart';
 import 'package:chat_app/infrastructure/dto/message.dart';
 import 'package:chat_app/infrastructure/dto/message_file.dart';
 import 'package:chat_app/infrastructure/dto/user.dart';
 import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
 import 'package:chat_app/presentation/functions/message_state.dart';
-import 'package:chat_app/utilities/fakers/generate_chat_faker.dart';
 
 class ChatMessagesController extends ChangeNotifier {
+  final ChatUserMessagesLogic chatUserMessagesLogic;
   final MessagesLogic messagesLogic;
-  ChatMessagesController(this.messagesLogic);
+  ChatMessagesController(this.messagesLogic, this.chatUserMessagesLogic);
 
   TextEditingController textController = TextEditingController();
+  final loggedUserId = 0;
+  List<UsersChatMessage> chatMessages = [];
+  List<User> users = [
+    User(
+      id: 0,
+      name: "Paulo",
+      email: "thelukgaming333@gmail.com",
+      profileImageUrl: null,
+    ),
+    User(
+      id: 1,
+      name: "Maria",
+      email: "maria@gmail.com",
+      profileImageUrl: null,
+    ),
+  ];
+  void getChatsMessages() async {
+    chatMessages = await chatUserMessagesLogic.getUsersChatMessages();
+    notifyListeners();
+  }
+
   void startListeningToTextController() {
     textController = TextEditingController();
     textController.addListener(listenerOfTextController);
@@ -32,23 +54,6 @@ class ChatMessagesController extends ChangeNotifier {
     textController.dispose();
   }
 
-  final loggedUserId = 0;
-  List<UsersChatMessage> chatMessages = createFakeUserChatMessage();
-  List<User> users = [
-    User(
-      id: 0,
-      name: "Paulo",
-      email: "thelukgaming333@gmail.com",
-      profileImageUrl: null,
-    ),
-    User(
-      id: 1,
-      name: "Maria",
-      email: "maria@gmail.com",
-      profileImageUrl: null,
-    ),
-  ];
-
   void sendMessage({
     required User toUser,
     required String bodyText,
@@ -57,7 +62,7 @@ class ChatMessagesController extends ChangeNotifier {
     required List<File> files,
   }) async {
     final newMessage = Message(
-      id: Random().nextInt(2555),
+      id: 0,
       sendToUserId: toUser.id,
       sendFromUserId: loggedUserId,
       bodyText: bodyText,
@@ -94,11 +99,11 @@ class ChatMessagesController extends ChangeNotifier {
 
     Message newMessageStatus = newMessage.seenMessageCopyWith();
 
-    chatMessages[chatMessageIndex].messages.add(newMessageStatus);
+    //Should we create the message to database here?
 
-    print(newMessageStatus.printMessageStatus());
-
-    print(getMessageStatusFromMessage(newMessageStatus));
+    chatMessages[chatMessageIndex]
+        .messages
+        .add(await messagesLogic.sendNewMessage(newMessageStatus));
 
     textController.clear();
 

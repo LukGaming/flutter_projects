@@ -37,6 +37,8 @@ class MessagesLogic {
         await _fileLocalService.saveMessageFilesLocaly(message.messageFiles);
     //Save message to database
 
+    print("saved: ${message.messageFiles.length} files");
+
     await _messageService.saveMessage(message);
 
     return message;

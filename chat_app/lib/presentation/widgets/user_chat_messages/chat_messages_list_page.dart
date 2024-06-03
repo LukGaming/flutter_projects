@@ -14,6 +14,7 @@ class _UserListChatsState extends State<UserListChats> {
   final _chatMessagesController = GetIt.instance<ChatMessagesController>();
   @override
   void initState() {
+    _chatMessagesController.getChatsMessages();
     super.initState();
   }
 

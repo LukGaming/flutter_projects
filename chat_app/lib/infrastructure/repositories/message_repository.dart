@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:chat_app/domains/entities/message_entity.dart';
+import 'package:chat_app/domains/entities/message_file_entity.dart';
 import 'package:chat_app/domains/entities/user_chat_messages_entity.dart';
 import 'package:chat_app/domains/repositories/message_repository.dart';
 import 'package:chat_app/objectbox.g.dart';
@@ -10,7 +13,10 @@ class MessageRepository implements IMessageRepository {
 
   @override
   Future<MessageEntity> save(MessageEntity message) async {
-    return messageBox.putAndGetAsync(message);
+    MessageEntity entity = await messageBox.putAndGetAsync(message);
+    entity.messageFiles
+        .forEach((element) => print("saved files: ${element.toString()}"));
+    return entity;
   }
 
   @override

@@ -33,6 +33,7 @@ class MessageWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Text(message.messageFiles.length.toString()),
                 if (message.messageFiles.isNotEmpty)
                   for (int i = 0; i < message.messageFiles.length; i++)
                     Image.file(File(message.messageFiles[i].localStoragePath!)),
