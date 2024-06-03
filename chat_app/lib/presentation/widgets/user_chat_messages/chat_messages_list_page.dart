@@ -41,7 +41,6 @@ class _UserListChatsState extends State<UserListChats> {
 
                 return UsersChatMessageCard(
                   sentToUser: userToSendMessage,
-                  messages: chatMessage.messages,
                   usersChatMessage: chatMessage,
                 );
               },

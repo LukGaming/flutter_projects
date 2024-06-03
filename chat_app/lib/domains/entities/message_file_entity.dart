@@ -3,11 +3,11 @@ import 'package:objectbox/objectbox.dart';
 @Entity()
 class MessageFileEntity {
   @Id()
-  int id;
+  int? id;
   String serverSrc;
   bool downloadedToLocalStorage;
   String? localStoragePath;
-  int messageId;
+  int? messageId;
   final bool sentToServer;
   MessageFileEntity({
     required this.id,

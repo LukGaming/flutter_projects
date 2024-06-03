@@ -4,7 +4,7 @@ import 'package:objectbox/objectbox.dart';
 @Entity()
 class MessageEntity {
   @Id()
-  int id;
+  int? id;
   int sendToUserId;
   int sendFromUserId;
   String bodyText;

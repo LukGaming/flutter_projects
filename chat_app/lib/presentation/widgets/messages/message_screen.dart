@@ -2,6 +2,7 @@ import 'package:chat_app/presentation/controllers/chat_messages_controller.dart'
 import 'package:chat_app/infrastructure/dto/message.dart';
 import 'package:chat_app/infrastructure/dto/user.dart';
 import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
+import 'package:chat_app/presentation/functions/message_functions.dart';
 import 'package:chat_app/presentation/widgets/messages/message_screen_appbar.dart';
 import 'package:chat_app/presentation/widgets/messages/message_widget.dart';
 import 'package:chat_app/presentation/widgets/messages/send_message_textfield.dart';
@@ -12,11 +13,9 @@ class MessagePageScreen extends StatefulWidget {
   final User chatWithUser;
   final UsersChatMessage usersChatMessage;
 
-  final List<Message> messages;
   const MessagePageScreen({
     super.key,
     required this.chatWithUser,
-    required this.messages,
     required this.usersChatMessage,
   });
 
@@ -41,9 +40,8 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
                 .where(
                     (element) => element.sentToUserId == widget.chatWithUser.id)
                 .first;
-            final orderedMessages = userChatMessages.messages;
-
-            orderedMessages.sort((a, b) => b.cratedAt.compareTo(a.cratedAt));
+            final orderedMessages =
+                orderMessagesByDate(userChatMessages.messages);
 
             return Column(
               children: [
@@ -68,11 +66,13 @@ class _MessagePageScreenState extends State<MessagePageScreen> {
                                   ? EdgeInsets.only(
                                       left:
                                           MediaQuery.of(context).size.width / 5,
-                                      top: 10)
+                                      top: 10,
+                                    )
                                   : EdgeInsets.only(
                                       right:
                                           MediaQuery.of(context).size.width / 5,
-                                      top: 10),
+                                      top: 10,
+                                    ),
                               child: MessageWidget(
                                 message: message,
                                 isMyMessage: isMyMessage,

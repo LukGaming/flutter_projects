@@ -1,7 +1,7 @@
 import 'package:chat_app/infrastructure/dto/message_file.dart';
 
 class Message {
-  int id;
+  int? id;
   int sendToUserId;
   int sendFromUserId;
   String bodyText;

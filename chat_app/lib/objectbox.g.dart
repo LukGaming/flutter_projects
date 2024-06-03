@@ -227,7 +227,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         model: _entities[0],
         toOneRelations: (MessageEntity object) => [],
         toManyRelations: (MessageEntity object) => {
-              obx_int.RelInfo<MessageEntity>.toMany(1, object.id):
+              obx_int.RelInfo<MessageEntity>.toMany(1, object.id!):
                   object.messageFiles
             },
         getId: (MessageEntity object) => object.id,
@@ -237,7 +237,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         objectToFB: (MessageEntity object, fb.Builder fbb) {
           final bodyTextOffset = fbb.writeString(object.bodyText);
           fbb.startTable(9);
-          fbb.addInt64(0, object.id);
+          fbb.addInt64(0, object.id ?? 0);
           fbb.addInt64(1, object.sendToUserId);
           fbb.addInt64(2, object.sendFromUserId);
           fbb.addOffset(3, bodyTextOffset);
@@ -246,13 +246,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addBool(6, object.received);
           fbb.addBool(7, object.seen);
           fbb.finish(fbb.endTable());
-          return object.id;
+          return object.id ?? 0;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
           final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
           final sendToUserIdParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
           final sendFromUserIdParam =
@@ -281,7 +281,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           obx_int.InternalToManyAccess.setRelInfo<MessageEntity>(
               object.messageFiles,
               store,
-              obx_int.RelInfo<MessageEntity>.toMany(1, object.id));
+              obx_int.RelInfo<MessageEntity>.toMany(1, object.id!));
           return object;
         }),
     MessageFileEntity: obx_int.EntityDefinition<MessageFileEntity>(
@@ -298,20 +298,20 @@ obx_int.ModelDefinition getObjectBoxModel() {
               ? null
               : fbb.writeString(object.localStoragePath!);
           fbb.startTable(7);
-          fbb.addInt64(0, object.id);
+          fbb.addInt64(0, object.id ?? 0);
           fbb.addOffset(1, serverSrcOffset);
           fbb.addBool(2, object.downloadedToLocalStorage);
           fbb.addOffset(3, localStoragePathOffset);
           fbb.addInt64(4, object.messageId);
           fbb.addBool(5, object.sentToServer);
           fbb.finish(fbb.endTable());
-          return object.id;
+          return object.id ?? 0;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
           final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
           final serverSrcParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
           final downloadedToLocalStorageParam =
@@ -320,7 +320,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 10);
           final messageIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 12);
           final sentToServerParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
           final object = MessageFileEntity(

@@ -1,9 +1,9 @@
 class MessageFile {
-  int id;
+  int? id;
   String serverSrc;
   bool downloadedToLocalStorage;
   String? localStoragePath;
-  int messageId;
+  int? messageId;
   final bool sentToServer;
   MessageFile({
     required this.id,

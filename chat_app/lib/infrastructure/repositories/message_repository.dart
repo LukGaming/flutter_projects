@@ -14,6 +14,7 @@ class MessageRepository implements IMessageRepository {
   @override
   Future<MessageEntity> save(MessageEntity message) async {
     MessageEntity entity = await messageBox.putAndGetAsync(message);
+    print("saving message to database");
     entity.messageFiles
         .forEach((element) => print("saved files: ${element.toString()}"));
     return entity;

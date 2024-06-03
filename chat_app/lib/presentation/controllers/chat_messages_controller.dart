@@ -62,7 +62,7 @@ class ChatMessagesController extends ChangeNotifier {
     required List<File> files,
   }) async {
     final newMessage = Message(
-      id: 0,
+      id: null,
       sendToUserId: toUser.id,
       sendFromUserId: loggedUserId,
       bodyText: bodyText,
@@ -80,11 +80,11 @@ class ChatMessagesController extends ChangeNotifier {
         (element) {
           messageFiles.add(
             MessageFile(
-              id: Random().nextInt(5000),
+              id: null,
               serverSrc: "",
               downloadedToLocalStorage: false,
               localStoragePath: element.path,
-              messageId: newMessage.id,
+              messageId: null,
               sentToServer: false,
             ),
           );
@@ -98,6 +98,8 @@ class ChatMessagesController extends ChangeNotifier {
         chatMessages.indexWhere((element) => element.id == chatMessage.id);
 
     Message newMessageStatus = newMessage.seenMessageCopyWith();
+
+    print("files: ${newMessage.messageFiles.length}");
 
     //Should we create the message to database here?
 
