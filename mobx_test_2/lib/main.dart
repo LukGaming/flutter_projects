@@ -49,12 +49,14 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Observer(builder: (context) {
-              return Text(
-                '${_counterController.count}',
-                style: Theme.of(context).textTheme.headlineMedium,
-              );
-            }),
+            Observer(
+              builder: (context) {
+                return Text(
+                  '${_counterController.count}',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                );
+              },
+            ),
             ElevatedButton(
               key: const Key("decrement"),
               onPressed: () {
