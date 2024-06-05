@@ -54,7 +54,7 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
                     }
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(

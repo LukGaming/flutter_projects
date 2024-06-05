@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:object_box/abstract_localstorage.dart';
+
 import 'package:object_box/enums/theme.dart';
+import 'package:object_box/infrastructure/repositories/ilocal_storage.dart';
 
 class ThemeController extends ChangeNotifier {
   ETheme theme = ETheme.light;
-  final ILocalStorage _localStorage;
 
-  ThemeController(this._localStorage);
+  final ILocalStorage localStorage;
 
-  void setTheme(ETheme newTheme) {
+  ThemeController(this.localStorage);
+
+  void setTheme(ETheme newTheme) async {
     theme = newTheme;
-    _localStorage.setItem("theme", getStringFromTheme(newTheme));
+    await localStorage.setItem("theme", getStringFromTheme(newTheme));
     notifyListeners();
   }
 
   void getTheme() async {
-    var themeFromStorage = await _localStorage.getItem("theme");
+    var themeFromStorage = await localStorage.getItem("theme");
     theme = getThemeFromString(themeFromStorage);
-
     notifyListeners();
   }
 }

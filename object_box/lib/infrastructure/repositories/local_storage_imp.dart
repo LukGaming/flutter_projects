@@ -1,15 +1,17 @@
 import 'package:localstorage/localstorage.dart';
-import 'package:object_box/abstract_localstorage.dart';
+import 'package:object_box/infrastructure/repositories/ilocal_storage.dart';
 
 class LocalStorageImp implements ILocalStorage {
   @override
-  Future<void> clearStorage() async {
+  Future<void> clear() async {
     localStorage.clear();
   }
 
   @override
   Future<String> getItem(String key) async {
-    return localStorage.getItem(key)!;
+    final String? item = localStorage.getItem(key);
+    if (item != null) return item;
+    throw Exception("Local storage Item not found");
   }
 
   @override
