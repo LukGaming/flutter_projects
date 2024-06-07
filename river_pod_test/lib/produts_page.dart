@@ -22,10 +22,13 @@ class _ProductsPageState extends ConsumerState<ProductsPage> {
     // TODO: implement initState
     super.initState();
     ref.read(productProvider).getProducts();
+
   }
 
   @override
   Widget build(BuildContext context) {
+
+
     final productState = ref.watch(productProvider);
     final state = productState.productState;
     print(state);

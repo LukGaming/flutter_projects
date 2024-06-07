@@ -13,9 +13,10 @@ class ProductController extends StateNotifier<BaseState> {
   void getProducts() async {
     await Future.delayed(const Duration(seconds: 4));
     state = ProductsLoaded(products: productList);
+
   }
 
-  BaseState get productState => state;
+
 }
 
 class ProductsLoaded extends BaseState {
