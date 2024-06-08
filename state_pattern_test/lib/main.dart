@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:state_pattern_test/base_state.dart';
 import 'package:state_pattern_test/product.dart';
 
@@ -35,17 +35,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
   @override
   void initState() {
-    List<Product> produtos = [
-      Product(
-        id: 1,
-        name: "Produto 1",
-      ),
-      Product(
-        id: 2,
-        name: "Produto 2",
-      )
-    ];
-    state = SuccessState(state: produtos);
+    getProducts();
     super.initState();
   }
 
@@ -56,18 +46,43 @@ class _ProductsPageState extends State<ProductsPage> {
     }
   }
 
+  void throwStateError() {
+    state = StateError(error: Exception("Erro gerado manualmente"));
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Lista de produtos"),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            throwStateError();
+          },
+          child: const Icon(Icons.error),
+        ),
         body: switch (state) {
           LoadingState() => const Center(
               child: CircularProgressIndicator(),
             ),
           SuccessState() => renderProductList((state as SuccessState).state),
-          _ => const Text("Ocorreu um erro não rastreável")
+          StateError() => Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Ocorreu um erro: ${(state as StateError).error}"),
+                  ElevatedButton(
+                    onPressed: () {
+                      getProducts();
+                    },
+                    child: const Text("Tente novamente"),
+                  )
+                ],
+              ),
+            ),
+          _ => const Text("Ocorreu um erro não rastreável ")
         });
   }
 
@@ -83,5 +98,20 @@ class _ProductsPageState extends State<ProductsPage> {
             child: const Text("Remover produto")),
       ),
     );
+  }
+
+  void getProducts() {
+    List<Product> produtos = [
+      Product(
+        id: 1,
+        name: "Produto 1",
+      ),
+      Product(
+        id: 2,
+        name: "Produto 2",
+      )
+    ];
+    state = SuccessState(state: produtos);
+    setState(() {});
   }
 }
