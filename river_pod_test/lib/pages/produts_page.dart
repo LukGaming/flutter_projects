@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:river_pod_test/base/state/base_state.dart';
+import 'package:river_pod_test/controllers/product_cart_controller.dart';
 import 'package:river_pod_test/controllers/product_controller.dart';
 
 import 'package:river_pod_test/models/product.dart';
-import 'package:river_pod_test/product_list_responsivity.dart';
+import 'package:river_pod_test/base/product_list_responsivity.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProductsPage extends ConsumerStatefulWidget {
@@ -19,19 +20,43 @@ class ProductsPage extends ConsumerStatefulWidget {
 class _ProductsPageState extends ConsumerState<ProductsPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    ref.read(productProvider).getProducts();
-
+    ref.read(productProvider.notifier).getProducts();
   }
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final state = ref.watch(productProvider);
 
+    return Scaffold(
+      key: scaffoldKey,
+      drawer: const Drawer(
+        key: Key("ProductsKey"),
+        child: Column(),
+      ),
+      appBar: AppBar(
+        title: const Text("Product List "),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              scaffoldKey.currentState?.openDrawer();
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Badge(
+                label: Text(ref.watch(productCartNotifier).length.toString()),
+                child: const Icon(Icons.shopping_cart_rounded),
+              ),
+            ),
+          )
+        ],
+      ),
+      body: renderBaseOnState(state),
+    );
+  }
 
-    final productState = ref.watch(productProvider);
-    final state = productState.productState;
-    print(state);
+  Widget renderBaseOnState(BaseState state) {
     if (state is LoadingState) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -41,7 +66,7 @@ class _ProductsPageState extends ConsumerState<ProductsPage> {
     if (state is ErrorState) {
       return const Text("Erro!");
     }
-    return Text("Algum erro");
+    return const Text("Algum erro");
   }
 }
 
@@ -57,6 +82,7 @@ class ProductList extends StatelessWidget {
     final ScreenSize screenSize =
         getScreenSize(MediaQuery.of(context).size.width);
     return GridView.builder(
+      itemCount: products.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount:
               getSliverDelegatesCrossQuantityFromScreenSize(screenSize)),
@@ -66,7 +92,7 @@ class ProductList extends StatelessWidget {
   }
 }
 
-class ProductWidget extends StatelessWidget {
+class ProductWidget extends ConsumerWidget {
   final Product product;
   const ProductWidget({
     super.key,
@@ -74,7 +100,11 @@ class ProductWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartNotifier = ref.watch(productCartNotifier);
+
+    bool isProductInCart = cartNotifier.contains(product);
+
     return Container(
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.all(10),
@@ -93,8 +123,8 @@ class ProductWidget extends StatelessWidget {
               child: Image.network(
                 product.imageUrl,
                 fit: BoxFit.fill,
-                errorBuilder: (context, error, stackTrace) => Container(
-                  child: const Center(
+                errorBuilder: (context, error, stackTrace) => const SizedBox(
+                  child: Center(
                     child: Text("Image Not Found"),
                   ),
                 ),
@@ -117,11 +147,17 @@ class ProductWidget extends StatelessWidget {
             Text(product.description),
             const SizedBox(height: 15),
             ElevatedButton(
-              onPressed: () {},
-              child: const Padding(
-                padding: EdgeInsets.all(5.0),
+              onPressed: () {
+                ref
+                    .read(productCartNotifier.notifier)
+                    .addProductToCard(product);
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
                 child: Center(
-                  child: Text("Adicionar ao Carrinho"),
+                  child: !isProductInCart
+                      ? const Text("Adicionar ao Carrinho")
+                      : const Text("Remover do carrinho"),
                 ),
               ),
             )
