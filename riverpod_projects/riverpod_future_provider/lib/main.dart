@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_provider/flutter_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_future_provider/future_provider.dart';
+import 'package:riverpod_future_provider/todo.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -37,6 +38,11 @@ class _HomePageState extends ConsumerState<HomePage> {
     ref.read(todoResponseProvider);
   }
 
+  void updateTodo(Todo todo) {
+    ref.read(updateTodoProvider(todo));
+    ref.read(todoResponseProvider);
+  }
+
   @override
   Widget build(BuildContext context) {
     final todosProvider = ref.watch(todoResponseProvider);
@@ -52,8 +58,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                 child: ListTile(
                   title: Text(value.todos[index].todo),
                   trailing: Checkbox(
-                      value: value.todos[index].completed,
-                      onChanged: (value) {}),
+                    value: value.todos[index].completed,
+                    onChanged: (bool? val) {
+                      updateTodo(value.todos[index].copyWith(completed: val));
+                    },
+                  ),
                 ),
               );
             },

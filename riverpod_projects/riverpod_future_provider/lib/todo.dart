@@ -24,7 +24,6 @@ class Todo {
   }
 
   factory Todo.fromMap(Map<String, dynamic> map) {
-    print(map['id'].runtimeType);
     return Todo(
       id: map['id'] as int,
       todo: map['todo'] as String,
@@ -33,6 +32,14 @@ class Todo {
   }
 
   factory Todo.fromJson(Map<String, dynamic> source) => Todo.fromMap(source);
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'todo': todo,
+      'completed': completed,
+    };
+  }
 }
 
 class TodoResponse {
