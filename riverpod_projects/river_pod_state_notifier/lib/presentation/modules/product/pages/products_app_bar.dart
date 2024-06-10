@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:river_pod_test/controllers/product_cart_controller.dart';
+import 'package:river_pod_test/presentation/controllers/product_cart_controller.dart';
 
 class AppBarProducts extends ConsumerWidget {
   const AppBarProducts({

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:river_pod_test/base/state/base_state.dart';
-import 'package:river_pod_test/controllers/product_controller.dart';
+import 'package:river_pod_test/presentation/controllers/product_controller.dart';
 import 'package:river_pod_test/presentation/modules/product/pages/produts_page.dart';
 
 Widget renderBaseOnState(BaseState state) {

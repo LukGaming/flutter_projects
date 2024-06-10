@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:river_pod_test/base/state/base_state.dart';
-import 'package:river_pod_test/controllers/product_cart_controller.dart';
-import 'package:river_pod_test/controllers/product_controller.dart';
+import 'package:river_pod_test/presentation/controllers/product_cart_controller.dart';
+import 'package:river_pod_test/presentation/controllers/product_controller.dart';
 
 import 'package:river_pod_test/models/product.dart';
 import 'package:river_pod_test/base/product_list_responsivity.dart';
@@ -140,26 +139,22 @@ class ProductWidget extends ConsumerWidget {
                 },
               ),
             ),
-            Text(
-              product.name,
-              maxLines: 3,
-              style: const TextStyle(fontSize: 20),
-            ),
-            Text(product.description),
-            const SizedBox(height: 15),
+            Text(product.name, maxLines: 1),
+            Text(product.description, maxLines: 1),
             ElevatedButton(
               onPressed: () {
                 ref
                     .read(cartNotifierProvider.notifier)
                     .addProductToCard(product, ref);
               },
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Center(
-                  child: !isProductInCart
-                      ? const Text("Adicionar ao Carrinho")
-                      : const Text("Remover do carrinho"),
-                ),
+              child: Center(
+                child: !isProductInCart
+                    ? const Column(
+                        children: [
+                          Text("Adicionar ao Carrinho"),
+                        ],
+                      )
+                    : const Text("Remover do carrinho"),
               ),
             )
           ],
