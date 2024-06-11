@@ -1,0 +1,1 @@
+enum Emap { dust2 }
