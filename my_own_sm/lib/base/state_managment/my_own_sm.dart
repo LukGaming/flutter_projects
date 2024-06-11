@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
-
 abstract class MyOwnSm {
-  List<VoidCallback> _listeners = [];
+  List<CallbackListener> _listeners = [];
 
-  void addListener(VoidCallback listener) {
+  void addListener(CallbackListener listener) {
     _listeners.add(listener);
   }
 
-  void removeListener(VoidCallback listener) {
+  void removeListener(CallbackListener listener) {
     print("Removendo Listener");
     _listeners.remove(listener);
     print(_listeners);
@@ -19,3 +17,5 @@ abstract class MyOwnSm {
     }
   }
 }
+
+typedef CallbackListener = Function();
