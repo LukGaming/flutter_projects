@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:testing_no_packages/my_first_page_withot_parameter.dart';
 import 'package:testing_no_packages/page_with_parameter.dart';
 import 'package:testing_no_packages/product.dart';
 import 'package:testing_no_packages/routes.dart';
@@ -52,6 +51,16 @@ class HomePage extends StatelessWidget {
                 );
               },
               child: const Text("Navegar para página com parametros"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.routeToPushAndRemove,
+                  (route) => false,
+                );
+              },
+              child: const Text("Navegar para página que não volta"),
             )
           ],
         ),
