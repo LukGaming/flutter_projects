@@ -18,4 +18,4 @@ abstract class MyOwnSm {
   }
 }
 
-typedef CallbackListener = Function();
+typedef CallbackListener = Function;

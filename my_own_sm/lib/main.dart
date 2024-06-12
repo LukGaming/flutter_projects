@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:my_own_sm/presentation/controllers/my_first_state_class.dart';
+import 'package:get_it/get_it.dart';
 import 'package:my_own_sm/base/state_managment/my_own_sm_consumer.dart';
+import 'package:my_own_sm/presentation/controllers/products_notifier.dart';
 import 'package:my_own_sm/presentation/widgets/my_second_consumer_widget.dart';
 import 'package:my_own_sm/dependencies/notifiers.dart';
 import 'package:my_own_sm/presentation/widgets/product_widget.dart';
 import 'package:my_own_sm/presentation/widgets/value_notifier_consumer.dart';
 
-void main() {
+Future<void> locator() async {
+  final i = GetIt.instance;
+  i.registerSingleton<IProductNotifier>(ProductsNotifier());
+}
+
+Future<void> main() async {
+  await locator();
   runApp(const MyApp());
 }
 
@@ -49,7 +56,8 @@ class _HomePageState extends State<HomePage> {
             onPressed: removeWidget,
             child: const Text("Remover widget"),
           ),
-          showWidget ? const ProductsWidget() : Container(),
+          showWidget ? const ProductsWidget(value: 1) : Container(),
+          const ProductsWidget(value: 2),
           const MyOwnNotifierConsumer(),
           const MySecondConsumerWidget(),
           MyOwnSmConsumer(

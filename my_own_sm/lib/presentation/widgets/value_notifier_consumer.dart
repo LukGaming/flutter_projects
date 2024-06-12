@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_own_sm/base/state_managment/my_own_notifier.dart';
 import 'package:my_own_sm/base/state_managment/my_own_sm_consumer.dart';
-import 'package:my_own_sm/presentation/widgets/product_widget.dart';
 
 class MyOwnNotifierConsumer extends StatelessWidget {
   const MyOwnNotifierConsumer({super.key});
@@ -9,6 +8,7 @@ class MyOwnNotifierConsumer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myOwnNotifier = MyOwnNotifier(0);
+
     return Column(
       children: [
         MyOwnSmConsumer(

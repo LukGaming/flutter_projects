@@ -6,10 +6,15 @@ import 'package:my_own_sm/base/state_managment/my_own_notifier.dart';
 
 import 'package:my_own_sm/models/types/typedefs.dart';
 
-class ProductsNotifier extends MyOwnNotifier<BaseState> {
+abstract class IProductNotifier extends MyOwnNotifier<BaseState> {
+  IProductNotifier(super.state);
+  void getProducts();
+}
+
+class ProductsNotifier extends IProductNotifier {
   final _productRepository = ProductsRepository();
   ProductsNotifier() : super(InitialState());
-
+  @override
   void getProducts() async {
     value = LoadingState();
     value = SuccessState<productsType>(

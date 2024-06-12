@@ -23,13 +23,11 @@ class _MyOwnSmConsumerState extends State<MyOwnSmConsumer> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     widget.listenable.removeListener(listener);
   }
 
   void listener() {
-    print("rebuilding");
     setState(() {});
   }
 
