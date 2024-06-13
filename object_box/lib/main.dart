@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:object_box/controllers/theme_controller.dart';
+import 'package:object_box/presentation/controllers/theme_controller.dart';
 import 'package:object_box/enums/theme.dart';
 import 'package:object_box/injector.dart';
-import 'package:object_box/pages/todo_page.dart';
+import 'package:object_box/presentation/pages/todo_page.dart';
 
 void main() async {
   await injector();

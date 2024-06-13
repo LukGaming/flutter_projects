@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:river_pod_test/models/product.dart';
 
+final cartNotifierProvider = StateNotifierProvider<CartNotifier, List<Product>>(
+  (ref) => CartNotifier(),
+);
+
+
 class CartNotifier extends StateNotifier<List<Product>> {
   CartNotifier() : super([]);
 
@@ -31,7 +36,3 @@ class CartNotifier extends StateNotifier<List<Product>> {
     }
   }
 }
-
-final cartNotifierProvider = StateNotifierProvider<CartNotifier, List<Product>>(
-  (ref) => CartNotifier(),
-);

@@ -148,13 +148,17 @@ class ProductWidget extends ConsumerWidget {
                     .addProductToCard(product, ref);
               },
               child: Center(
-                child: !isProductInCart
-                    ? const Column(
-                        children: [
-                          Text("Adicionar ao Carrinho"),
-                        ],
-                      )
-                    : const Text("Remover do carrinho"),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      !isProductInCart
+                          ? "Adicionar ao Carrinho"
+                          : "Remover do carrinho",
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
             )
           ],

@@ -19,25 +19,28 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(internetConnectionProvider, (prev, next) {
-      print("rebuildando");
-      next.when(
-        data: (data) {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              key: const Key("snackbar"),
-              duration: const Duration(seconds: 4),
-              content: Text(
-                "Status da conexão: $data",
+    ref.listen(
+      internetConnectionProvider,
+      (prev, next) {
+        print("rebuildando");
+        next.when(
+          data: (data) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                key: const Key("snackbar"),
+                duration: const Duration(seconds: 4),
+                content: Text(
+                  "Status da conexão: $data",
+                ),
               ),
-            ),
-          );
-        },
-        error: (e, stackTrace) => {},
-        loading: () => {},
-      );
-    });
+            );
+          },
+          error: (e, stackTrace) => {},
+          loading: () => {},
+        );
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text("Internet Connection test"),
