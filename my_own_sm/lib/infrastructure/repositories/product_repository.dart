@@ -2,7 +2,7 @@ import 'package:my_own_sm/models/product.dart';
 import 'package:my_own_sm/models/types/typedefs.dart';
 
 class ProductsRepository {
-  Future<productsType> getProducts() async {
+  Future<ProductsList> getProducts() async {
     await Future.delayed(const Duration(seconds: 2));
     return [
       Product(

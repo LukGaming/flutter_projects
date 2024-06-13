@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:my_own_sm/base/base_state.dart';
+import 'package:my_own_sm/base/models/base_state.dart';
 
 import 'package:my_own_sm/models/product.dart';
 
-import 'package:my_own_sm/base/state_managment/my_own_sm_consumer.dart';
+import 'package:my_own_sm/consumer/my_own_sm_consumer.dart';
 import 'package:my_own_sm/presentation/controllers/products_notifier.dart';
 
 class ProductsWidget extends StatefulWidget {

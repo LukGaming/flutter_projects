@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_own_sm/base/state_managment/my_own_notifier.dart';
-import 'package:my_own_sm/base/state_managment/my_own_sm_consumer.dart';
+import 'package:my_own_sm/consumer/my_own_sm_consumer.dart';
 
 class MyOwnNotifierConsumer extends StatelessWidget {
   const MyOwnNotifierConsumer({super.key});

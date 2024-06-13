@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:my_own_sm/base/state_managment/my_own_sm_consumer.dart';
+import 'package:my_own_sm/base/state_managment/my_own_notifier.dart';
+import 'package:my_own_sm/consumer/my_own_sm_consumer.dart';
+import 'package:my_own_sm/consumer/my_own_value_notifier_consumer.dart';
 import 'package:my_own_sm/presentation/controllers/products_notifier.dart';
 import 'package:my_own_sm/presentation/widgets/my_second_consumer_widget.dart';
 import 'package:my_own_sm/dependencies/notifiers.dart';
@@ -52,6 +54,8 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const ValueListenerTest(),
+          const TestingMyOwnConsumer(),
           TextButton(
             onPressed: removeWidget,
             child: const Text("Remover widget"),
@@ -81,6 +85,58 @@ class _HomePageState extends State<HomePage> {
         },
         child: const Icon(Icons.add),
       ),
+    );
+  }
+}
+
+class TestingMyOwnConsumer extends StatelessWidget {
+  const TestingMyOwnConsumer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var count = MyOwnNotifier(0);
+    return MyOwnValueNotifierConsummer(
+      valueListenable: count,
+      builder: (context, state) {
+        return Expanded(
+          child: Column(
+            children: [
+              TextButton(
+                onPressed: () {
+                  count.value++;
+                },
+                child: const Text("Increment"),
+              ),
+              Text("$state"),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ValueListenerTest extends StatefulWidget {
+  const ValueListenerTest({super.key});
+
+  @override
+  State<ValueListenerTest> createState() => _ValueListenerTestState();
+}
+
+class _ValueListenerTestState extends State<ValueListenerTest> {
+  @override
+  Widget build(BuildContext context) {
+    final counter = ValueNotifier(0);
+    return ValueListenableBuilder(
+      valueListenable: counter,
+      builder: (context, value, child) {
+        return TextButton(
+          onPressed: () {
+            counter.value++;
+          },
+          child: Text(value.toString()),
+        );
+      },
     );
   }
 }
