@@ -21,28 +21,19 @@ class _TestNotifierStateWidgetState extends State<TestNotifierStateWidget>
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    print("Dispose do widget");
-  }
-
-  @override
   Widget build(BuildContext context) {
     return switch (notifierState.value) {
       LoadingState() => const Center(
           child: CircularProgressIndicator(),
         ),
-      SuccessState() => Center(
-          child: Column(
-            children: [
-              const Text("Estado de sucesso"),
-              ElevatedButton(
-                  onPressed: () {
-                    notifierState.changeToLoadingState();
-                  },
-                  child: const Text("Atualizar estado"))
-            ],
+      SuccessState<List<Product>>(:final data) => Expanded(
+          child: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) => Card(
+              child: ListTile(
+                title: Text(data[index].name),
+              ),
+            ),
           ),
         ),
       _ => Container(),

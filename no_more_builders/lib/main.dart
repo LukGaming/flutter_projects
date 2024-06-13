@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> with React {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            showWidget ? const SecondListenerWidget() : Container(),
+            showWidget ? const TestNotifierStateWidget() : Container(),
             Text("mobx Store: ${mobxStore.count.toString()}"),
             ElevatedButton(
               onPressed: () {
@@ -99,14 +99,5 @@ class _HomePageState extends State<HomePage> with React {
         child: const Icon(Icons.add),
       ),
     );
-  }
-}
-
-class SecondListenerWidget extends StatelessWidget {
-  const SecondListenerWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const TestNotifierStateWidget();
   }
 }
