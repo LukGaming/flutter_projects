@@ -17,7 +17,7 @@ class Product {
       'id': id,
       'name': name,
       'price': price,
-      'categoryId': categoryId,
+      'category_id': categoryId,
     };
   }
 
@@ -26,7 +26,7 @@ class Product {
       id: map['id'] != null ? map['id'] as int : null,
       name: map['name'] as String,
       price: map['price'] as double,
-      categoryId: map['categoryId'] as int,
+      categoryId: map['category_id'] as int,
     );
   }
 
@@ -42,5 +42,10 @@ class Product {
       price: price ?? this.price,
       categoryId: categoryId ?? this.categoryId,
     );
+  }
+
+  @override
+  String toString() {
+    return 'Product(id: $id, name: $name, price: $price, categoryId: $categoryId)';
   }
 }

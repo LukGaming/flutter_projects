@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite_test/presentation/views/products_view.dart';
+import 'package:sqflite_test/dependencies/locator.dart';
+import 'package:sqflite_test/presentation/views/product_list_view.dart';
+import 'package:sqflite_test/presentation/views/create_products_page.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await locator();
   runApp(const MyApp());
 }
 
@@ -15,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: false,
       ),
-      home: const ProductsView(),
+      home: const ProductListView(),
     );
   }
 }

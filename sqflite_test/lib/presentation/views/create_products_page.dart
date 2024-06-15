@@ -1,16 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:sqflite_test/presentation/widgets/create_product_form_widget.dart';
 
-class ProductsView extends StatefulWidget {
-  const ProductsView({super.key});
+class CreateProductsPage extends StatefulWidget {
+  const CreateProductsPage({super.key});
 
   @override
-  State<ProductsView> createState() => _ProductsViewState();
+  State<CreateProductsPage> createState() => _CreateProductsPageState();
 }
 
-class _ProductsViewState extends State<ProductsView> {
+class _CreateProductsPageState extends State<CreateProductsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,8 +16,9 @@ class _ProductsViewState extends State<ProductsView> {
         title: const Text("Gerenciamento de produtos"),
       ),
       body: const Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(10.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CreateProductFormWidget(),
           ],
