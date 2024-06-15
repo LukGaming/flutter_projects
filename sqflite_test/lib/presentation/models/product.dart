@@ -1,8 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class Product {
   int? id;
   String name;
   double price;
   int categoryId;
+
   Product({
     this.id,
     required this.name,
@@ -25,6 +27,20 @@ class Product {
       name: map['name'] as String,
       price: map['price'] as double,
       categoryId: map['categoryId'] as int,
+    );
+  }
+
+  Product copyWith({
+    int? id,
+    String? name,
+    double? price,
+    int? categoryId,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      price: price ?? this.price,
+      categoryId: categoryId ?? this.categoryId,
     );
   }
 }

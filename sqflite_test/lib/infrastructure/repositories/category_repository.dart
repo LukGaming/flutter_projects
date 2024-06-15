@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:sqflite/sqflite.dart';
 
-import 'package:sqflite_test/category.dart';
+import 'package:sqflite_test/presentation/models/category.dart';
 import 'package:sqflite_test/db/tables/category.dart';
 
 abstract class ICategoryRepository {

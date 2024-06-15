@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_test/category.dart';
+import 'package:sqflite_test/presentation/models/category.dart';
 import 'package:sqflite_test/dependencies/locator.dart';
 import 'package:sqflite_test/infrastructure/repositories/category_repository.dart';
 
