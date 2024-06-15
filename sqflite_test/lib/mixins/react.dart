@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 mixin React<T extends StatefulWidget> on State<T> {
-  final List<Listenable> _listenables = [];
+  List<Listenable> _listenables = [];
 
   void react(Listenable listenable) {
     if (!_listenables.contains(listenable)) {
@@ -20,5 +20,6 @@ mixin React<T extends StatefulWidget> on State<T> {
     for (int i = 0; i < _listenables.length; i++) {
       _listenables[i].removeListener(_callback);
     }
+    _listenables = [];
   }
 }

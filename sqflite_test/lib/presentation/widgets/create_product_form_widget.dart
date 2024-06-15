@@ -31,7 +31,6 @@ class _CreateProductFormWidgetState extends State<CreateProductFormWidget> {
   void initState() {
     super.initState();
     _productPriceEditingController.text = _zeroValue;
-    print("categorias: ${_productManagerController.categories}");
   }
 
   void validade() {
@@ -44,6 +43,7 @@ class _CreateProductFormWidgetState extends State<CreateProductFormWidget> {
         categoryId: selectedCategory!.id!,
       );
       _productManagerController.addProduct(product);
+      Navigator.of(context).pop();
     }
   }
 
