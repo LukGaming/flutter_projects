@@ -1,8 +1,8 @@
-import 'package:cs2_gsi/enums/map_enum.dart';
 import 'package:cs2_gsi/functions/map_stats.dart';
-import 'package:cs2_gsi/models/gsi_data.dart';
 import 'package:cs2_gsi/models/map_data.dart';
+
 import 'package:cs2_gsi/models/map_stats.dart';
+import 'package:cs2_gsi/models/player_data.dart';
 import 'package:cs2_gsi/widgets/show_map_stats_widget.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -36,31 +36,31 @@ class MatchConnectionPage extends StatefulWidget {
 
 class _MatchConnectionPageState extends State<MatchConnectionPage> {
   late IO.Socket socket;
-
   CSMap? mapStat;
+  List<PlayerData>? teamCt;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initSocket();
   }
 
   void initSocket() {
-    socket = IO.io("http://192.168.0.6:2626", <String, dynamic>{
+    socket = IO.io("http://192.168.0.4:2626", <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': true,
     });
 
     socket.connect();
 
-    print(socket.connected);
-
     socket.onConnectError((error) => print(error));
 
     socket.on('update', (data) {
-      mapStat = getMapStatFromJson(data['map']);
-
+      CurrentMapData matchStats = CurrentMapData.fromJson(data);
+      // mapStat = getMapStatFromJson(data['map']);
+      // List<PlayerData> allPlayers = getPlayersFromJson(data["allplayers"]);
+      // List<PlayerData> ctPlayers = filterCtPlayers(allPlayers);
+      // List<PlayerData> tPlayers = filterCtPlayers(allPlayers);
       setState(() {});
     });
   }

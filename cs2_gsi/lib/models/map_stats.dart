@@ -3,7 +3,6 @@ class CSMap {
   final String name;
   final String phase;
   final int? round;
-
   final int? numMatchesToWinSeries;
   final int? currentSpectators;
   final int? souvenirsTotal;

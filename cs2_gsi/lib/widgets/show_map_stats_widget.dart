@@ -1,13 +1,9 @@
-import 'package:cs2_gsi/models/map_data.dart';
 import 'package:cs2_gsi/models/map_stats.dart';
 import 'package:flutter/material.dart';
 
 class ShowMapStatsWidget extends StatelessWidget {
   final CSMap mapStats;
-  const ShowMapStatsWidget({
-    super.key,
-    required this.mapStats,
-  });
+  const ShowMapStatsWidget({super.key, required this.mapStats});
 
   @override
   Widget build(BuildContext context) {
