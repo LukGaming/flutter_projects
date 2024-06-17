@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:object_box/domain/entities/todo.dart';
 import 'package:object_box/domain/interfaces/Itodo_repository.dart';
 
@@ -14,7 +16,7 @@ class TodoController extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-  void getTodos() async {
+  Future<void> getTodos() async {
     setIsloading(true);
     _todos = [];
 
@@ -31,7 +33,7 @@ class TodoController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setTodoDone(Todo todo, bool value) async {
+  Future<void> setTodoDone(Todo todo, bool value) async {
     int todoIndex = _todos.indexWhere((element) => element.id == todo.id);
 
     await todoRepository.save(todo.copyWith(done: value));
@@ -41,31 +43,31 @@ class TodoController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void create({
+  Future<void> create({
     required Todo todo,
-    required BuildContext context,
+    // required BuildContext context,
   }) async {
     _todos.add(await todoRepository.save(todo));
     notifyListeners();
-    Navigator.of(context).pop();
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Todo criado com sucesso!"),
-      ),
-    );
+    // Navigator.of(context).pop();
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   const SnackBar(
+    //     content: Text("Todo criado com sucesso!"),
+    //   ),
+    // );
   }
 
-  void removeTodo({
-    required Todo todo,
-    required BuildContext context,
-  }) async {
+  Future<void> removeTodo(
+    Todo todo,
+    // required BuildContext context,
+  ) async {
     _todos.remove(todo);
     await todoRepository.delete(todo);
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Todo removido com sucesso!"),
-      ),
-    );
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   const SnackBar(
+    //     content: Text("Todo removido com sucesso!"),
+    //   ),
+    // );
 
     notifyListeners();
   }

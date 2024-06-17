@@ -54,10 +54,7 @@ class TodoWidget extends StatelessWidget {
               ),
             );
             if (remove == true) {
-              _todoController.removeTodo(
-                context: context,
-                todo: todo,
-              );
+              _todoController.removeTodo(todo);
             }
           },
           icon: const Icon(Icons.delete)),

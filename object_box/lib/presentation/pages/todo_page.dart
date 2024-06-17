@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
-import 'package:object_box/controllers/theme_controller.dart';
-import 'package:object_box/controllers/todo_controller.dart';
+import 'package:object_box/presentation/controllers/theme_controller.dart';
+import 'package:object_box/presentation/controllers/todo_controller.dart';
 import 'package:object_box/enums/theme.dart';
-import 'package:object_box/pages/create_todo_page.dart';
-import 'package:object_box/widgets/todo_widget.dart';
+import 'package:object_box/presentation/pages/create_todo_page.dart';
+import 'package:object_box/presentation/widgets/todo_widget.dart';
 
 class TodosPage extends StatefulWidget {
   const TodosPage({super.key});
