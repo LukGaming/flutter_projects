@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'builder.dart';
 
 Future<void> main(List<String> args) async {
   final _myNotifier = ValueNotifier(0);
@@ -21,7 +21,6 @@ class _MyOwnSmContext {
   var isTracking = false;
   void reportListener(Listenable listenable) {
     if (isTracking) {
-      print("isTracking");
       _listenables.add(listenable);
     }
   }
@@ -50,7 +49,6 @@ class MyOwnSm<T> extends ValueNotifier<T> {
 }
 
 VoidCallback reaction(VoidCallback scope) {
-  print("initiating reaction");
   _myOwnSmContext.track();
   scope.call();
   Listenable listenable = _myOwnSmContext.unTrack();
