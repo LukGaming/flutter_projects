@@ -1,4 +1,4 @@
-import 'package:chat_app/infrastructure/dto/message.dart';
+import 'package:chat_app/domains/models/message.dart';
 
 abstract class IRemoteMessageService {
   Future<Message> sendMessageToUser(Message message);

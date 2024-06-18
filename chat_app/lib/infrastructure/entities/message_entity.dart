@@ -1,4 +1,4 @@
-import 'package:chat_app/domains/entities/message_file_entity.dart';
+import 'package:chat_app/infrastructure/entities/message_file_entity.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()

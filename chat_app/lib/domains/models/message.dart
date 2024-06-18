@@ -1,4 +1,4 @@
-import 'package:chat_app/infrastructure/dto/message_file.dart';
+import 'package:chat_app/domains/models/message_file.dart';
 
 class Message {
   int? id;

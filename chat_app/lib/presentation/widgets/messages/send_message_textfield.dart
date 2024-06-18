@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:chat_app/presentation/controllers/chat_messages_controller.dart';
-import 'package:chat_app/infrastructure/dto/user.dart';
-import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
+import 'package:chat_app/domains/models/user.dart';
+import 'package:chat_app/domains/models/users_chat_message.dart';
 import 'package:chat_app/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -44,7 +44,7 @@ class _SendMessageTextFieldWidgetState
       padding: const EdgeInsets.all(5),
       margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-          color: textFieldBackgroundColor,
+          color: Colors.grey[200],
           borderRadius: const BorderRadius.all(Radius.circular(5))),
       child: TextFormField(
         maxLines: null,

@@ -1,4 +1,4 @@
-import 'package:chat_app/infrastructure/dto/user.dart';
+import 'package:chat_app/domains/models/user.dart';
 import 'package:chat_app/presentation/widgets/user_chat_messages/show_user_profile_image_card.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +13,9 @@ class ChatAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: Colors.blue[800],
       actions: const [
         Icon(Icons.settings),
-
       ],
       leading: Row(
         children: [

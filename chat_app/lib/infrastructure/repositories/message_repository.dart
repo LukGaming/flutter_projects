@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:chat_app/domains/entities/message_entity.dart';
-import 'package:chat_app/domains/entities/message_file_entity.dart';
-import 'package:chat_app/domains/entities/user_chat_messages_entity.dart';
+import 'package:chat_app/infrastructure/entities/message_entity.dart';
+import 'package:chat_app/infrastructure/entities/message_file_entity.dart';
+import 'package:chat_app/infrastructure/entities/user_chat_messages_entity.dart';
 import 'package:chat_app/domains/repositories/message_repository.dart';
 import 'package:chat_app/objectbox.g.dart';
 

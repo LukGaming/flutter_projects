@@ -21,7 +21,6 @@ class _UserListChatsState extends State<UserListChats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: ListenableBuilder(
           listenable: _chatMessagesController,
           builder: (_, __) {

@@ -1,5 +1,5 @@
 import 'package:chat_app/presentation/functions/message_state.dart';
-import 'package:chat_app/infrastructure/dto/message.dart';
+import 'package:chat_app/domains/models/message.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -1,5 +1,5 @@
-import 'package:chat_app/domains/entities/user_entity.dart';
-import 'package:chat_app/infrastructure/dto/user.dart';
+import 'package:chat_app/infrastructure/entities/user_entity.dart';
+import 'package:chat_app/domains/models/user.dart';
 
 class UserMapper {
   static User toUser(UserEntity userEntity) {

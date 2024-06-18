@@ -1,10 +1,9 @@
-import 'package:chat_app/domains/logic/chat_user_messages_logic.dart';
 import 'package:chat_app/domains/services/check_internet_connection_service.dart';
 import 'package:chat_app/domains/services/file_local_service.dart';
 import 'package:chat_app/domains/services/local_database_message_service.dart';
 import 'package:chat_app/domains/services/remote_message_service.dart';
-import 'package:chat_app/infrastructure/dto/message.dart';
-import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
+import 'package:chat_app/domains/models/message.dart';
+import 'package:chat_app/domains/models/users_chat_message.dart';
 
 class MessagesLogic {
   final ICheckInternetConnectionService _checkInternetConnectionService;

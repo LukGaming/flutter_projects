@@ -1,5 +1,5 @@
 import 'package:chat_app/presentation/functions/message_state.dart';
-import 'package:chat_app/infrastructure/dto/message.dart';
+import 'package:chat_app/domains/models/message.dart';
 import 'package:chat_app/presentation/theme/message_status_icons.dart';
 import 'package:flutter/material.dart';
 

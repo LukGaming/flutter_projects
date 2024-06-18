@@ -14,10 +14,10 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'domains/entities/message_entity.dart';
-import 'domains/entities/message_file_entity.dart';
-import 'domains/entities/user_chat_messages_entity.dart';
-import 'domains/entities/user_entity.dart';
+import 'infrastructure/entities/message_entity.dart';
+import 'infrastructure/entities/message_file_entity.dart';
+import 'infrastructure/entities/user_chat_messages_entity.dart';
+import 'infrastructure/entities/user_entity.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 

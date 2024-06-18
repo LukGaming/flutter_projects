@@ -1,5 +1,5 @@
-import 'package:chat_app/domains/entities/message_file_entity.dart';
-import 'package:chat_app/infrastructure/dto/message_file.dart';
+import 'package:chat_app/infrastructure/entities/message_file_entity.dart';
+import 'package:chat_app/domains/models/message_file.dart';
 
 class MessageFileMapper {
   static MessageFileEntity toEntity(MessageFile messageFile) {

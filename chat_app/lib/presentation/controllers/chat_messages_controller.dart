@@ -6,10 +6,10 @@ import 'package:chat_app/domains/logic/chat_user_messages_logic.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chat_app/domains/logic/message_logic.dart';
-import 'package:chat_app/infrastructure/dto/message.dart';
-import 'package:chat_app/infrastructure/dto/message_file.dart';
-import 'package:chat_app/infrastructure/dto/user.dart';
-import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
+import 'package:chat_app/domains/models/message.dart';
+import 'package:chat_app/domains/models/message_file.dart';
+import 'package:chat_app/domains/models/user.dart';
+import 'package:chat_app/domains/models/users_chat_message.dart';
 import 'package:chat_app/presentation/functions/message_state.dart';
 
 class ChatMessagesController extends ChangeNotifier {

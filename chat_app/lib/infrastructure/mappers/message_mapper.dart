@@ -1,7 +1,7 @@
-import 'package:chat_app/domains/entities/message_entity.dart';
-import 'package:chat_app/domains/entities/message_file_entity.dart';
-import 'package:chat_app/infrastructure/dto/message.dart';
-import 'package:chat_app/infrastructure/dto/message_file.dart';
+import 'package:chat_app/infrastructure/entities/message_entity.dart';
+import 'package:chat_app/infrastructure/entities/message_file_entity.dart';
+import 'package:chat_app/domains/models/message.dart';
+import 'package:chat_app/domains/models/message_file.dart';
 import 'package:chat_app/infrastructure/mappers/message_file_mapper.dart';
 import 'package:objectbox/objectbox.dart';
 

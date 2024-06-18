@@ -1,6 +1,6 @@
 import 'package:chat_app/domains/logic/message_logic.dart';
-import 'package:chat_app/infrastructure/dto/message.dart';
-import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
+import 'package:chat_app/domains/models/message.dart';
+import 'package:chat_app/domains/models/users_chat_message.dart';
 
 class ChatUserMessagesLogic {
   final MessagesLogic messagesLogic;

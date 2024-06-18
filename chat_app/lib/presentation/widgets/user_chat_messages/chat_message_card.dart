@@ -1,6 +1,6 @@
-import 'package:chat_app/infrastructure/dto/message.dart';
-import 'package:chat_app/infrastructure/dto/user.dart';
-import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
+import 'package:chat_app/domains/models/message.dart';
+import 'package:chat_app/domains/models/user.dart';
+import 'package:chat_app/domains/models/users_chat_message.dart';
 import 'package:chat_app/presentation/controllers/chat_messages_controller.dart';
 import 'package:chat_app/presentation/functions/message_functions.dart';
 import 'package:chat_app/presentation/widgets/messages/last_message_widget.dart';
@@ -40,6 +40,7 @@ class _UsersChatMessageCardState extends State<UsersChatMessageCard> {
         Message? lastMessage = getLastMessage(messages);
 
         return Card(
+          color: Colors.yellow[700],
           child: ListTile(
               onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(

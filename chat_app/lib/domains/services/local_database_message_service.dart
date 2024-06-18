@@ -1,8 +1,8 @@
-import 'package:chat_app/domains/entities/message_entity.dart';
+import 'package:chat_app/infrastructure/entities/message_entity.dart';
 import 'package:chat_app/domains/logic/chat_user_messages_logic.dart';
 import 'package:chat_app/domains/repositories/message_repository.dart';
-import 'package:chat_app/infrastructure/dto/message.dart';
-import 'package:chat_app/infrastructure/dto/users_chat_message.dart';
+import 'package:chat_app/domains/models/message.dart';
+import 'package:chat_app/domains/models/users_chat_message.dart';
 import 'package:chat_app/infrastructure/mappers/message_mapper.dart';
 import 'package:chat_app/infrastructure/mappers/user_chat_message_mapper.dart';
 

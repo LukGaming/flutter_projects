@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:chat_app/presentation/functions/date_time_functions.dart';
 import 'package:chat_app/presentation/functions/message_state.dart';
 import 'package:chat_app/presentation/functions/status_message_status_icon.dart';
-import 'package:chat_app/infrastructure/dto/message.dart';
+import 'package:chat_app/domains/models/message.dart';
 import 'package:chat_app/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -26,7 +26,7 @@ class MessageWidget extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
-              color: isMyMessage ? rightContainerColor : leftContainerColor,
+              color: isMyMessage ? Colors.lightBlue[200] : leftContainerColor,
             ),
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -37,9 +37,10 @@ class MessageWidget extends StatelessWidget {
                   for (int i = 0; i < message.messageFiles.length; i++)
                     Column(
                       children: [
-                        Text(message.messageFiles[i].id.toString()),
                         Image.file(
-                            File(message.messageFiles[i].localStoragePath!)),
+                          File(message.messageFiles[i].localStoragePath!),
+                          fit: BoxFit.fitHeight,
+                        ),
                       ],
                     ),
                 Text(

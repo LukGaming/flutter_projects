@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:chat_app/infrastructure/dto/message_file.dart';
+import 'package:chat_app/domains/models/message_file.dart';
 import 'package:path/path.dart' as path;
 
 abstract class IFileLocalService {
