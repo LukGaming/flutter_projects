@@ -3,7 +3,7 @@ class PlayerData {
   final int observerSlot;
   final String team;
   final MatchStats matchStats;
-  final Position position;
+  final PlayerPosition position;
   final Forward forward;
   final PlayerState state;
   final Weapons? weapons;
@@ -25,7 +25,7 @@ class PlayerData {
       observerSlot: json['observer_slot'],
       team: json['team'],
       matchStats: MatchStats.fromJson(json['match_stats']),
-      position: Position.fromJson(json['position']),
+      position: PlayerPosition.fromJson(json['position']),
       forward: Forward.fromJson(json['forward']),
       state: PlayerState.fromJson(json['state']),
       weapons: Weapons.fromJson(json['weapons']),
@@ -59,20 +59,20 @@ class MatchStats {
   }
 }
 
-class Position {
+class PlayerPosition {
   final double x;
   final double y;
   final double z;
 
-  Position({
+  PlayerPosition({
     required this.x,
     required this.y,
     required this.z,
   });
 
-  factory Position.fromJson(String json) {
+  factory PlayerPosition.fromJson(String json) {
     var positions = json.split(',');
-    return Position(
+    return PlayerPosition(
       x: double.parse(positions[0]),
       y: double.parse(positions[1]),
       z: double.parse(positions[2]),
