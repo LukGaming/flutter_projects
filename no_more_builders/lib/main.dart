@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:no_more_builders/notifier_state.dart';
 import 'package:no_more_builders/notifiers.dart';
 import 'package:no_more_builders/notifiers_extension.dart';
 import 'package:no_more_builders/test_notifier_state.dart';
@@ -29,8 +31,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+final valueListenable = ValueNotifier<BaseState>(LoadingState());
+
 class _HomePageState extends State<HomePage> with React {
   bool showWidget = true;
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +50,9 @@ class _HomePageState extends State<HomePage> with React {
     reactToNotifier(notifierState);
     reactToNotifier(myState);
     reactToNotifier(myNotifier);
+
+    Future.delayed(const Duration(seconds: 1)).then(
+        (e) => valueListenable.value = SuccessState(data: "Carregado..."));
   }
 
   void toggleWidget() {
@@ -53,21 +61,19 @@ class _HomePageState extends State<HomePage> with React {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    print("Dispose do widget");
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final valueListenableState = reactToValueListenable(valueListenable);
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             showWidget ? const TestNotifierStateWidget() : Container(),
-            Text("mobx Store: ${mobxStore.count.toString()}"),
+            valueListenableState is LoadingState
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : const Text("Estado carregado..."),
             ElevatedButton(
               onPressed: () {
                 mobxStore.increment();

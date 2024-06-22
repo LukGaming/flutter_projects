@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 mixin React<T extends StatefulWidget> on State<T> {
@@ -7,6 +8,16 @@ mixin React<T extends StatefulWidget> on State<T> {
     if (mounted) {
       setState(() {});
     }
+  }
+
+  E reactToValueListenable<E>(
+    ValueListenable<E> valueListenable,
+  ) {
+    valueListenable.addListener(listenableCallback);
+    if (_listenables.contains(valueListenable)) {
+      _listenables.add(valueListenable);
+    }
+    return valueListenable.value;
   }
 
   void reactToNotifier(Listenable listenable) {
@@ -23,7 +34,6 @@ mixin React<T extends StatefulWidget> on State<T> {
 
   @override
   void dispose() {
-    print("Calling dispose here");
     for (final listenable in _listenables) {
       listenable.removeListener(listenableCallback);
     }
