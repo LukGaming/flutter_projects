@@ -8,6 +8,7 @@ class DependencyInjector implements IDependencyInjector {
   factory DependencyInjector() {
     return _instance;
   }
+
   final Map<Type, dynamic> _singletonInstances = {};
   final Map<Type, Function> _factoryFunctions = {};
   final Map<Type, Function> _lazySingletonFunctions = {};
@@ -58,7 +59,7 @@ class DependencyInjector implements IDependencyInjector {
   }
 
   @override
-  void dispose() {
+  void clearDependencies() {
     _singletonInstances.clear();
     _factoryFunctions.clear();
     _lazySingletonFunctions.clear();
