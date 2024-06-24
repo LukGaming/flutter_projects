@@ -1,7 +1,8 @@
+import 'package:flutter_core/core/abstract/abstract_base_state_controller.dart';
 import 'package:flutter_core/core/abstract/abstract_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class _CounterController extends IController<int> {
+class _CounterController extends BaseController<int> {
   //iniciamos com um valor inicial no super
   _CounterController() : super(0);
 
