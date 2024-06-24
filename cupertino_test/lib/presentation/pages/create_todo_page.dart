@@ -28,6 +28,11 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
           child: Column(
             children: [
               CupertinoTextFormFieldRow(
+                validator: (value) {
+                  if (value == null || value == "") {
+                    return "O campo de nome não pode ficar vazio";
+                  }
+                },
                 style: const TextStyle(color: Colors.white),
                 placeholder: "Nome do todo",
                 placeholderStyle: const TextStyle(color: Colors.white),
@@ -40,14 +45,18 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
                 controller: nameEditingController,
               ),
               CupertinoButton(
+                color: Colors.blue,
                 child: const Text("Salvar"),
                 onPressed: () async {
-                  await _todoController.addTodo(
-                    Todo(
-                      name: nameEditingController.text,
-                    ),
-                  );
-                  Navigator.of(context).pop();
+                  bool? isFormValid = formKey.currentState?.validate();
+                  if (isFormValid == true) {
+                    await _todoController.addTodo(
+                      Todo(
+                        name: nameEditingController.text,
+                      ),
+                    );
+                    Navigator.of(context).pop();
+                  }
                 },
               )
             ],
