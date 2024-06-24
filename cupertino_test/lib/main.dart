@@ -1,13 +1,22 @@
-import 'package:cupertino_test/presentation/controllers/todo_controller.dart';
-import 'package:cupertino_test/presentation/models/base_state.dart';
+import 'package:cupertino_test/dependencies/locator.dart';
+import 'package:cupertino_test/presentation/pages/create_todo_page.dart';
 import 'package:cupertino_test/presentation/pages/todos_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const CupertinoApp(
-    home: MyHomePage(),
-  ));
+void main() async {
+  await locator();
+
+  runApp(
+    const CupertinoApp(
+      theme: CupertinoThemeData(
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: Colors.grey,
+        applyThemeToAll: true,
+      ),
+      home: MyHomePage(),
+    ),
+  );
 }
 
 class MyHomePage extends StatefulWidget {
@@ -26,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       child: Stack(
         children: [
-          const Expanded(child: TodosPage()),
+          const TodosPage(),
           Positioned(
             bottom: 15,
             right: 15,
@@ -43,7 +52,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   size: 30,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  CupertinoPageRoute(
+                    builder: (context) => const CreateTodoPage(),
+                  ),
+                );
+              },
             ),
           )
         ],
