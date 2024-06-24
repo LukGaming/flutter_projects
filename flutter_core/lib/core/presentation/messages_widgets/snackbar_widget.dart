@@ -21,19 +21,11 @@ class _ShowSnackBarWidgetState extends State<ShowSnackBarWidget> {
   void messageCallback() {
     final message = _messageController.value;
     if (message is ShowSnackbarMessage) {
-      if (message.closeLastSnackbar) {
+      if (message.closePreviousSnackBar) {
         ScaffoldMessenger.of(context).clearSnackBars();
       }
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          action: SnackBarAction(
-            label: "Action",
-            onPressed: () {},
-            textColor: Colors.red,
-          ),
-          content: Text(message.text),
-          backgroundColor: message.backGroundColor,
-        ),
+        message.snackBar,
       );
     }
   }

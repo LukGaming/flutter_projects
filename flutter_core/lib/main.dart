@@ -39,9 +39,11 @@ class HomePage extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               _messageController.showSnackbar(
-                const SnackBar(
-                  content: Text("Texto da snackbar"),
+                snackBar: SnackBar(
+                  showCloseIcon: true,
+                  content: Text("Texto da snackbar $snackbarCounter"),
                 ),
+                closePreviousSnackBar: false,
               );
               snackbarCounter++;
             },

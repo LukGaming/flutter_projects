@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 class MessagingController extends ValueNotifier<BaseMessage> {
   MessagingController() : super(InitialMessage());
 
-  void showSnackbar(SnackBar snackBar) {
-    value = ShowSnackbarMessage(snackBar: snackBar, closePreviousSnackBar: );
+  void showSnackbar({
+    required SnackBar snackBar,
+    bool closePreviousSnackBar = false,
+  }) {
+    value = ShowSnackbarMessage(
+      snackBar: snackBar,
+      closePreviousSnackBar: closePreviousSnackBar,
+    );
   }
 }
 
@@ -16,6 +22,8 @@ class ShowSnackbarMessage extends BaseMessage {
   final SnackBar snackBar;
   final bool closePreviousSnackBar;
 
-  ShowSnackbarMessage(
-      {required this.snackBar, this.closePreviousSnackBar = false});
+  ShowSnackbarMessage({
+    required this.snackBar,
+    this.closePreviousSnackBar = false,
+  });
 }
