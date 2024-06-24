@@ -1,9 +1,11 @@
-import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class MessagingController extends ValueNotifier<BaseMessage> {
   MessagingController() : super(InitialMessage());
+
+  void showSnackbar(SnackBar snackBar) {
+    value = ShowSnackbarMessage(snackBar: snackBar, closePreviousSnackBar: );
+  }
 }
 
 abstract class BaseMessage {}
@@ -11,11 +13,9 @@ abstract class BaseMessage {}
 class InitialMessage extends BaseMessage {}
 
 class ShowSnackbarMessage extends BaseMessage {
-  final String message;
-  Color? backGroundColor;
+  final SnackBar snackBar;
+  final bool closePreviousSnackBar;
 
   ShowSnackbarMessage(
-    this.message, {
-    required required,
-  });
+      {required this.snackBar, this.closePreviousSnackBar = false});
 }

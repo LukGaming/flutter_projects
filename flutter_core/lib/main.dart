@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_core/core/infra/injector.dart';
 import 'package:flutter_core/core/infra/locator.dart';
-import 'package:flutter_core/core/presentation/messages_widgets/snackbar.dart';
+import 'package:flutter_core/core/presentation/controllers/messaging_controller.dart';
+import 'package:flutter_core/core/presentation/messages_widgets/snackbar_widget.dart';
 
 void main() async {
   await locator();
@@ -28,12 +30,23 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _messageController = DependencyInjector().get<MessagingController>();
+    int snackbarCounter = 0;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
         children: [
           ElevatedButton(
-              onPressed: () {}, child: const Text("Mostrar Snackbar"))
+            onPressed: () {
+              _messageController.showSnackbar(
+                const SnackBar(
+                  content: Text("Texto da snackbar"),
+                ),
+              );
+              snackbarCounter++;
+            },
+            child: const Text("Mostrar Snackbar"),
+          )
         ],
       ),
     );
