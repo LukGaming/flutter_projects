@@ -3,6 +3,7 @@ import 'package:cupertino_test/presentation/models/base_state.dart';
 import 'package:cupertino_test/presentation/models/todo.dart';
 import 'package:cupertino_test/presentation/widgets/todos_list_view_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 
 class TodosPage extends StatefulWidget {
   const TodosPage({super.key});
@@ -12,7 +13,8 @@ class TodosPage extends StatefulWidget {
 }
 
 class _TodosPageState extends State<TodosPage> {
-  final _todoController = TodoController();
+  final _todoController = GetIt.instance<TodoController>();
+
   void callback() {
     setState(() {});
   }

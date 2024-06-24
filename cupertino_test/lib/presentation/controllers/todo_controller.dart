@@ -13,4 +13,11 @@ class TodoController extends ValueNotifier<BaseState> {
       Todo(id: 2, name: "segundo todo"),
     ]);
   }
+
+  Future<void> addTodo(Todo todo) async {
+    if (value is SuccessState) {
+      (value as SuccessState<List<Todo>>).data.add(todo);
+      notifyListeners();
+    }
+  }
 }
