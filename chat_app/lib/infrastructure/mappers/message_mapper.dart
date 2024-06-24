@@ -11,8 +11,6 @@ class MessageMapper {
         .map((element) => MessageFileMapper.toMessageFile(element))
         .toList();
 
-    print("Enviando ${messageFiles.length} files");
-
     return Message(
       id: messageEntity.id,
       sendToUserId: messageEntity.sendToUserId,

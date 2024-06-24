@@ -36,6 +36,7 @@ class _ReactBuildElement extends StatelessElement {
     final child = super.build();
     listenable?.removeListener(listener);
     listenable = _myOwnSmContext.unTrack();
+
     listenable?.addListener(listener);
     return child;
   }

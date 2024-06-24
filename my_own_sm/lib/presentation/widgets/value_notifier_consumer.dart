@@ -13,7 +13,11 @@ class MyOwnNotifierConsumer extends StatelessWidget {
       children: [
         MyOwnSmConsumer(
           listenable: myOwnNotifier,
-          builder: (context) => Text(myOwnNotifier.value.toString()),
+          builder: (context) {
+            return Text(
+              myOwnNotifier.value.toString(),
+            );
+          },
         ),
         TextButton(
           onPressed: () {

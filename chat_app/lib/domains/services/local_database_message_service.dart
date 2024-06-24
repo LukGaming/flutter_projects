@@ -1,5 +1,4 @@
 import 'package:chat_app/infrastructure/entities/message_entity.dart';
-import 'package:chat_app/domains/logic/chat_user_messages_logic.dart';
 import 'package:chat_app/domains/repositories/message_repository.dart';
 import 'package:chat_app/domains/models/message.dart';
 import 'package:chat_app/domains/models/users_chat_message.dart';
@@ -18,6 +17,7 @@ class MessageService implements IMessageService {
   final IMessageRepository messageRepository;
 
   MessageService(this.messageRepository);
+
   @override
   Future<Message> saveMessage(Message message) async {
     final MessageEntity createdMessage =

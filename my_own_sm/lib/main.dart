@@ -54,16 +54,16 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const ValueListenerTest(),
-          const TestingMyOwnConsumer(),
-          TextButton(
-            onPressed: removeWidget,
-            child: const Text("Remover widget"),
-          ),
-          showWidget ? const ProductsWidget(value: 1) : Container(),
-          const ProductsWidget(value: 2),
-          const MyOwnNotifierConsumer(),
-          const MySecondConsumerWidget(),
+          // const ValueListenerTest(),
+          // const TestingMyOwnConsumer(),
+          // TextButton(
+          //   onPressed: removeWidget,
+          //   child: const Text("Remover widget"),
+          // ),
+          // showWidget ? const ProductsWidget(value: 1) : Container(),
+          // const ProductsWidget(value: 2),
+          // const MyOwnNotifierConsumer(),
+          // const MySecondConsumerWidget(),
           MyOwnSmConsumer(
             listenable: myState,
             builder: (context) {

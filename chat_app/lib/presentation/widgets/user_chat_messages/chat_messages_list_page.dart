@@ -21,31 +21,35 @@ class _UserListChatsState extends State<UserListChats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListenableBuilder(
-          listenable: _chatMessagesController,
-          builder: (_, __) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                final chatMessage = _chatMessagesController.chatMessages[index];
-                //TODO: trocar para usuário real
-                final currentLoggedUser = _chatMessagesController.users
-                    .where((element) =>
-                        element.id == _chatMessagesController.loggedUserId)
-                    .first;
+      body: SafeArea(
+        child: ListenableBuilder(
+            listenable: _chatMessagesController,
+            builder: (_, __) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final chatMessage =
+                      _chatMessagesController.chatMessages[index];
 
-                final userToSendMessage = _chatMessagesController.users
-                    .where((element) =>
-                        element.id != _chatMessagesController.loggedUserId)
-                    .first;
+                  //TODO: trocar para usuário real
+                  final currentLoggedUser = _chatMessagesController.users
+                      .where((element) =>
+                          element.id == _chatMessagesController.loggedUserId)
+                      .first;
 
-                return UsersChatMessageCard(
-                  sentToUser: userToSendMessage,
-                  usersChatMessage: chatMessage,
-                );
-              },
-              itemCount: _chatMessagesController.chatMessages.length,
-            );
-          }),
+                  final userToSendMessage = _chatMessagesController.users
+                      .where((element) =>
+                          element.id != _chatMessagesController.loggedUserId)
+                      .first;
+
+                  return UsersChatMessageCard(
+                    sentToUser: userToSendMessage,
+                    usersChatMessage: chatMessage,
+                  );
+                },
+                itemCount: _chatMessagesController.chatMessages.length,
+              );
+            }),
+      ),
     );
   }
 }

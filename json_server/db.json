@@ -1,9 +1,7 @@
 {
-  "todos": [
+  "teachers": [
     {
-      "id": 1,
-      "name": "Todo 01",
-      "done": false
+      "name": "Jacob"
     }
   ]
 }
