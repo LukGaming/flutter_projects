@@ -36,26 +36,24 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4),
+      duration: const Duration(seconds: 2),
     );
 
     _animation = CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeIn,
     );
-
     _animationController.forward();
-
-    Timer(
-      const Duration(seconds: 2),
-      () {
+    _animation.addStatusListener((listener) {
+      if (listener == AnimationStatus.completed) {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => const HomePage(),
           ),
         );
-      },
-    );
+      }
+    });
+
     super.initState();
   }
 
