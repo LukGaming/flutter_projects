@@ -19,8 +19,14 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
     final formKey = GlobalKey<FormState>();
     final nameEditingController = TextEditingController();
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Criando todos'),
+      navigationBar: CupertinoNavigationBar(
+        trailing: IconButton(
+          icon: const Icon(Icons.delete),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        middle: const Text('Criando todos'),
       ),
       child: SafeArea(
         child: Form(

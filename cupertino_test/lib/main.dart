@@ -9,6 +9,7 @@ void main() async {
 
   runApp(
     const CupertinoApp(
+      debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.grey,
