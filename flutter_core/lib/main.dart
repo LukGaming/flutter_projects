@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_core/core/infra/injector_imp.dart';
 import 'package:flutter_core/core/infra/locator_imp.dart';
+import 'package:flutter_core/core/media/camera_picker.dart';
+import 'package:flutter_core/core/media/photo_gallery_picker.dart';
+import 'package:flutter_core/core/media/record_video.dart';
+import 'package:flutter_core/core/media/sound_recorder.dart';
 import 'package:flutter_core/core/presentation/controllers/messaging_controller.dart';
 import 'package:flutter_core/core/presentation/messages_widgets/snackbar_widget.dart';
 
@@ -48,6 +52,30 @@ class HomePage extends StatelessWidget {
               snackbarCounter++;
             },
             child: const Text("Mostrar Snackbar"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Column(
+                    children: [
+                      CameraPicker(
+                        onPickedImage: (image) {},
+                      ),
+                      VideoRecorder(
+                        onPickedVideo: (video) {},
+                      ),
+                      PhotoGalleryPicker(
+                        onPickedPhoto: (pickedPhoto) {},
+                      ),
+                      RecordAudio(),
+                    ],
+                  );
+                },
+              );
+            },
+            child: const Text("Mostrar opções de Media"),
           )
         ],
       ),
