@@ -6,6 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class RecordAudio extends StatefulWidget {
+  const RecordAudio({super.key});
+
   @override
   _RecordAudioState createState() => _RecordAudioState();
 }
@@ -26,11 +28,11 @@ class _RecordAudioState extends State<RecordAudio> {
       Directory appDir = await getApplicationDocumentsDirectory();
       String path =
           '${appDir.path}/audio_${DateTime.now().millisecondsSinceEpoch}.aac';
+      await _recorder!.openRecorder();
       await _recorder!.startRecorder(toFile: path);
-      setState(() {
-        _isRecordingAudio = true;
-        _audioPath = path;
-      });
+      _isRecordingAudio = true;
+      _audioPath = path;
+      setState(() {});
     }
   }
 
@@ -40,7 +42,6 @@ class _RecordAudioState extends State<RecordAudio> {
       setState(() {
         _isRecordingAudio = false;
       });
-      // Process the recorded audio
     }
   }
 
@@ -52,10 +53,26 @@ class _RecordAudioState extends State<RecordAudio> {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(Icons.mic),
-      title: Text(_isRecordingAudio ? 'Stop Recording Audio' : 'Record Audio'),
-      onTap: _isRecordingAudio ? _stopRecordingAudio : _startRecordingAudio,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          _isRecordingAudio ? Icons.mic : Icons.mic_off,
+          size: 100.0,
+          color: _isRecordingAudio ? Colors.red : Colors.grey,
+        ),
+        const SizedBox(height: 20.0),
+        ElevatedButton(
+          onPressed:
+              _isRecordingAudio ? _stopRecordingAudio : _startRecordingAudio,
+          child: Text(_isRecordingAudio ? 'Stop Recording' : 'Start Recording'),
+        ),
+        if (_audioPath != null)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Saved to: $_audioPath'),
+          ),
+      ],
     );
   }
 }
