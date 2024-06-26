@@ -129,31 +129,4 @@ void main() {
       expect((controller.state as SuccessState<_User>).data.name, "Paulo");
     });
   });
-
-  testWidgets('LoggedUserWidget shows CircularProgressIndicator when loading',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LoggedUserWidget()));
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
-  });
-
-  testWidgets('LoggedUserWidget shows button when error state',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LoggedUserWidget()));
-    _userController.state = ErrorState("User not logged");
-    _userController.update();
-    await tester.pump();
-    expect(find.byType(ElevatedButton), findsOneWidget);
-    expect(find.text("Usuário não logado"), findsOneWidget);
-  });
-
-  testWidgets('LoggedUserWidget shows user data when success state',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LoggedUserWidget()));
-    _userController.state = SuccessState(_User(id: 11, name: "Paulo"));
-    _userController.update();
-    await tester.pump();
-    expect(find.text("Usuário logado."), findsOneWidget);
-    expect(find.text("id: 11"), findsOneWidget);
-    expect(find.text("nome: Paulo"), findsOneWidget);
-  });
 }

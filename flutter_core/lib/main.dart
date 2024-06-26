@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/core/infra/injector.dart';
-import 'package:flutter_core/core/infra/locator.dart';
+import 'package:flutter_core/core/infra/injector_imp.dart';
+import 'package:flutter_core/core/infra/locator_imp.dart';
 import 'package:flutter_core/core/presentation/controllers/messaging_controller.dart';
 import 'package:flutter_core/core/presentation/messages_widgets/snackbar_widget.dart';
 

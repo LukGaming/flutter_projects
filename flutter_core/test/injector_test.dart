@@ -1,4 +1,4 @@
-import 'package:flutter_core/core/infra/injector.dart';
+import 'package:flutter_core/core/infra/injector_imp.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class ServiceA {}
