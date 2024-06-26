@@ -23,6 +23,8 @@ void main() {
     test('should remove item by key', () async {
       when(mockLocalStorage.clearItem(any)).thenAnswer((_) async => {});
 
+      await localStorage.clearItem('testKey');
+
       verify(mockLocalStorage.clearItem('testKey')).called(1);
     });
 
