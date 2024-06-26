@@ -36,48 +36,64 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _messageController = DependencyInjector().get<MessagingController>();
     int snackbarCounter = 0;
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              _messageController.showSnackbar(
-                snackBar: SnackBar(
-                  showCloseIcon: true,
-                  content: Text("Texto da snackbar $snackbarCounter"),
-                ),
-                closePreviousSnackBar: false,
-              );
-              snackbarCounter++;
-            },
-            child: const Text("Mostrar Snackbar"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return Column(
-                    children: [
-                      CameraPicker(
-                        onPickedImage: (image) {},
-                      ),
-                      VideoRecorder(
-                        onPickedVideo: (video) {},
-                      ),
-                      PhotoGalleryPicker(
-                        onPickedPhoto: (pickedPhoto) {},
-                      ),
-                      RecordAudio(),
-                    ],
-                  );
-                },
-              );
-            },
-            child: const Text("Mostrar opções de Media"),
-          )
-        ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                _messageController.showSnackbar(
+                  snackBar: SnackBar(
+                    showCloseIcon: true,
+                    content: Text("Texto da snackbar $snackbarCounter"),
+                  ),
+                  closePreviousSnackBar: false,
+                );
+                snackbarCounter++;
+              },
+              child: const Text("Mostrar Snackbar"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Column(
+                      children: [
+                        CameraPicker(
+                          onPickedImage: (image) {},
+                        ),
+                        VideoRecorder(
+                          onPickedVideo: (video) {},
+                        ),
+                        PhotoGalleryPicker(
+                          onPickedPhoto: (pickedPhoto) {},
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.mic),
+                          title: const Text("Record Audio"),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const AlertDialog(
+                                  content: RecordAudio(),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        // RecordAudio(),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: const Text("Mostrar opções de Media"),
+            )
+          ],
+        ),
       ),
     );
   }
