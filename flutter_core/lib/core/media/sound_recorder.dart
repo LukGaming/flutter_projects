@@ -5,6 +5,33 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+enum EAudioRecordStatus {
+  initial,
+  recording,
+  stopped,
+  finished,
+}
+
+IconData getIconFromRecordingStatus(EAudioRecordStatus status) {
+  switch (status) {
+    case EAudioRecordStatus.initial:
+      return Icons.mic;
+
+    default:
+      return Icons.mic_off;
+  }
+}
+
+Color getColorFromRecordingStatus(EAudioRecordStatus status) {
+  switch (status) {
+    case EAudioRecordStatus.initial:
+      return Colors.grey;
+
+    default:
+      return Colors.red;
+  }
+}
+
 class RecordAudio extends StatefulWidget {
   const RecordAudio({super.key});
 
@@ -14,7 +41,7 @@ class RecordAudio extends StatefulWidget {
 
 class _RecordAudioState extends State<RecordAudio> {
   FlutterSoundRecorder? _recorder;
-  bool _isRecordingAudio = false;
+  EAudioRecordStatus recordingStatus = EAudioRecordStatus.initial;
   String? _audioPath;
 
   @override
@@ -30,18 +57,18 @@ class _RecordAudioState extends State<RecordAudio> {
           '${appDir.path}/audio_${DateTime.now().millisecondsSinceEpoch}.aac';
       await _recorder!.openRecorder();
       await _recorder!.startRecorder(toFile: path);
-      _isRecordingAudio = true;
+
+      recordingStatus = EAudioRecordStatus.recording;
       _audioPath = path;
       setState(() {});
     }
   }
 
   Future<void> _stopRecordingAudio() async {
-    if (_isRecordingAudio) {
+    if (recordingStatus == EAudioRecordStatus.recording) {
       await _recorder!.stopRecorder();
-      setState(() {
-        _isRecordingAudio = false;
-      });
+      recordingStatus = EAudioRecordStatus.finished;
+      setState(() {});
     }
   }
 
@@ -53,25 +80,44 @@ class _RecordAudioState extends State<RecordAudio> {
 
   @override
   Widget build(BuildContext context) {
+    final IconData recordingIcon = getIconFromRecordingStatus(recordingStatus);
+    final Color iconColor = getColorFromRecordingStatus(recordingStatus);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          _isRecordingAudio ? Icons.mic : Icons.mic_off,
+          recordingIcon,
           size: 100.0,
-          color: _isRecordingAudio ? Colors.red : Colors.grey,
+          color: iconColor,
         ),
         const SizedBox(height: 20.0),
-        ElevatedButton(
-          onPressed:
-              _isRecordingAudio ? _stopRecordingAudio : _startRecordingAudio,
-          child: Text(_isRecordingAudio ? 'Stop Recording' : 'Start Recording'),
-        ),
-        if (_audioPath != null)
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Saved to: $_audioPath'),
-          ),
+        Row(
+          children: [
+            ElevatedButton(
+              onPressed: recordingStatus == EAudioRecordStatus.recording
+                  ? _stopRecordingAudio
+                  : _startRecordingAudio,
+              child: Text(
+                recordingStatus == EAudioRecordStatus.recording
+                    ? 'Stop Recording'
+                    : 'Start Recording',
+              ),
+            ),
+            recordingStatus == EAudioRecordStatus.finished
+                ? Container(
+                    color: Colors.blue,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.send,
+                        color: Colors.black,
+                      ),
+                    ),
+                  )
+                : Container()
+          ],
+        )
       ],
     );
   }

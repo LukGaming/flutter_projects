@@ -78,7 +78,9 @@ class HomePage extends StatelessWidget {
                               context: context,
                               builder: (context) {
                                 return const AlertDialog(
-                                  content: RecordAudio(),
+                                  content: IntrinsicHeight(
+                                    child: RecordAudio(),
+                                  ),
                                 );
                               },
                             );
