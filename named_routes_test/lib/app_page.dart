@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:named_routes_test/dashboard_page.dart';
 import 'package:named_routes_test/routes.dart';
 
 class AppPage extends StatelessWidget {
@@ -17,7 +18,7 @@ class AppPage extends StatelessWidget {
             const Text("Informações da página inicial..."),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(Routes.dashboard);
+                Navigator.of(context).pushNamed(Routes.dashBoardPage);
               },
               child: const Text("Navegar para Dashboard"),
             )

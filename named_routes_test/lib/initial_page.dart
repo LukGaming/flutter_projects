@@ -17,10 +17,10 @@ class _InitialPageState extends State<InitialPage> {
 
   void handleNavigation() async {
     await Future.delayed(const Duration(seconds: 2));
-    Navigator.of(context).pushNamedAndRemoveUntil(
-      Routes.loginPage,
-      (route) => false,
-    );
+    if (mounted) {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(Routes.loginPage, (route) => false);
+    }
   }
 
   @override

@@ -16,13 +16,16 @@ class LoginPage extends StatelessWidget {
           children: [
             const Text("Página de Login"),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    Routes.appPage,
-                    (route) => false,
-                  );
-                },
-                child: const Text("Efetuar login"))
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  Routes.appPage,
+                  (route) => false,
+                );
+              },
+              child: const Text(
+                "Efetuar login",
+              ),
+            )
           ],
         ),
       ),
