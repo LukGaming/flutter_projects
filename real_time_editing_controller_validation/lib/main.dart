@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_editing_controller_validation/src/objects/leading_validation_icons.dart';
-import 'package:real_time_editing_controller_validation/src/objects/prefix_validation_icons.dart';
-import 'package:real_time_editing_controller_validation/src/objects/suffix_validation_icons.dart';
+import 'package:real_time_editing_controller_validation/src/controllers/real_time_form_controller.dart';
+import 'package:real_time_editing_controller_validation/src/classes/leading_validation_icons.dart';
+import 'package:real_time_editing_controller_validation/src/classes/prefix_validation_icons.dart';
+import 'package:real_time_editing_controller_validation/src/classes/suffix_validation_icons.dart';
 import 'package:real_time_editing_controller_validation/src/widgets/custom_text_field.dart';
+import 'package:real_time_editing_controller_validation/src/widgets/real_time_validation_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,21 +59,22 @@ class FindFormByContext extends StatefulWidget {
 }
 
 class _FindFormByContextState extends State<FindFormByContext> {
-  final EditingControllersState myState = EditingControllersState();
+  final RTFormController myState = RTFormController();
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    final _firstController = TextEditingController();
-    final _secondController = TextEditingController();
+    final firstController = TextEditingController();
+    final secondController = TextEditingController();
+    final formController = RTFormController();
+
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Form(
-        key: _formKey,
+      child: RTFormValidator(
+        rtFormController: formController,
         child: Column(
           children: [
-            CustomTextField(
-              controller: _firstController,
+            RTTextField(
+              controller: firstController,
               validator: (value) {
                 if (value == "") {
                   return "O valor não pode ficar vazio.";
@@ -98,8 +101,8 @@ class _FindFormByContextState extends State<FindFormByContext> {
                 successIcon: const Icon(Icons.person, color: Colors.green),
               ),
             ),
-            CustomTextField(
-              controller: _secondController,
+            RTTextField(
+              controller: secondController,
               validator: (value) {
                 if (value == "") {
                   return "O valor não pode ficar vazio.";
@@ -131,7 +134,9 @@ class _FindFormByContextState extends State<FindFormByContext> {
             ),
             ElevatedButton(
               onPressed: () {
-                bool? isFormValid = _formKey.currentState?.validate();
+                bool isFormValid = formController.isFormValid();
+
+                print("IsformValid: $isFormValid");
               },
               child: const Text("Validate"),
             ),
@@ -139,66 +144,5 @@ class _FindFormByContextState extends State<FindFormByContext> {
         ),
       ),
     );
-  }
-}
-
-class MyForm extends StatefulWidget {
-  final EditingControllersState myState;
-  final Widget child;
-  const MyForm({
-    super.key,
-    required this.myState,
-    required this.child,
-  });
-
-  @override
-  State<MyForm> createState() => _MyFormState();
-}
-
-class _MyFormState extends State<MyForm> {
-  @override
-  Widget build(BuildContext context) {
-    return FormScope(
-      myState: widget.myState,
-      child: widget.child,
-    );
-  }
-}
-
-class FormScope extends InheritedWidget {
-  final EditingControllersState myState;
-  const FormScope({
-    super.key,
-    required this.myState,
-    required super.child,
-  });
-
-  @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    print("maybe this is changing");
-    return true;
-  }
-}
-
-class EditingControllersState extends ChangeNotifier {
-  final List<TextEditingController> _controllers = [];
-  void update() {
-    notifyListeners();
-  }
-
-  void validate() {
-    notifyListeners();
-  }
-
-  void addController(TextEditingController controller) {
-    _controllers.add(controller);
-  }
-
-  void removeController(TextEditingController controller) {
-    _controllers.remove(controller);
-  }
-
-  bool isFormValid() {
-    return true;
   }
 }

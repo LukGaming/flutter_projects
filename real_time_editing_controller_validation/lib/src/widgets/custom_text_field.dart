@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:real_time_editing_controller_validation/src/objects/leading_validation_icons.dart';
-import 'package:real_time_editing_controller_validation/src/objects/prefix_validation_icons.dart';
-import 'package:real_time_editing_controller_validation/src/objects/suffix_validation_icons.dart';
-import 'package:real_time_editing_controller_validation/src/objects/validation_state.dart';
+import 'package:real_time_editing_controller_validation/src/classes/text_controller.dart';
+import 'package:real_time_editing_controller_validation/src/controllers/real_time_form_controller.dart';
+import 'package:real_time_editing_controller_validation/src/classes/leading_validation_icons.dart';
+import 'package:real_time_editing_controller_validation/src/classes/prefix_validation_icons.dart';
+import 'package:real_time_editing_controller_validation/src/classes/suffix_validation_icons.dart';
+import 'package:real_time_editing_controller_validation/src/classes/validation_state.dart';
+import 'package:real_time_editing_controller_validation/src/widgets/real_time_validation_form.dart';
 
-class CustomTextField extends StatefulWidget {
+class RTTextField extends StatefulWidget {
   final bool? validateOnUserInteraction;
   final PrefixValidationIcons? validationPrefixIcons;
   final SuffixValidationIcons? validationSuffixIcons;
   final ValidationLeadingIcons? validationLeadingIcons;
   final String? Function(String value) validator;
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final FocusNode? focusNode;
   final InputDecoration? decoration;
   final TextInputType? keyboardType;
@@ -57,14 +60,14 @@ class CustomTextField extends StatefulWidget {
   final Iterable<String>? autofillHints;
   final AutovalidateMode? autovalidateMode;
 
-  const CustomTextField({
+  const RTTextField({
     Key? key,
     required this.validator,
+    required this.controller,
     this.validateOnUserInteraction = true,
     this.validationPrefixIcons,
     this.validationSuffixIcons,
     this.validationLeadingIcons,
-    this.controller,
     this.focusNode,
     this.decoration,
     this.keyboardType,
@@ -112,11 +115,37 @@ class CustomTextField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
+  _RTTextFieldState createState() => _RTTextFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _RTTextFieldState extends State<RTTextField> {
   ValidationState validationState = IddleValidation();
+  RTFormController? myState;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (duration) {
+        final scope = context.dependOnInheritedWidgetOfExactType<RTFormScope>();
+        if (scope != null) {
+          myState = scope.myState;
+
+          if (widget.controller != null) {}
+          scope.myState.addController(
+            TextController(widget.controller, widget.validator),
+          );
+          scope.myState.addListener(onFormValidation);
+        }
+      },
+    );
+    super.initState();
+  }
+
+  void onFormValidation() {
+    print("Revalidando");
+    onUserInteractionCallback(widget.controller!.text);
+    setState(() {});
+  }
 
   void onUserInteractionCallback(String value) {
     final errorMessage = widget.validator(value);
