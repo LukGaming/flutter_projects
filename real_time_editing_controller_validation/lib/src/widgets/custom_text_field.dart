@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:real_time_editing_controller_validation/src/classes/error_text_custom_style.dart';
 import 'package:real_time_editing_controller_validation/src/classes/text_controller.dart';
 import 'package:real_time_editing_controller_validation/src/controllers/real_time_form_controller.dart';
 import 'package:real_time_editing_controller_validation/src/classes/leading_validation_icons.dart';
@@ -15,6 +16,7 @@ class RTTextField extends StatefulWidget {
   final ValidationLeadingIcons? validationLeadingIcons;
   final String? Function(String value) validator;
   final TextEditingController controller;
+  final CustomErrorTextStyle? customErrorTextStyle;
   final FocusNode? focusNode;
   final InputDecoration? decoration;
   final TextInputType? keyboardType;
@@ -64,6 +66,7 @@ class RTTextField extends StatefulWidget {
     Key? key,
     required this.validator,
     required this.controller,
+    this.customErrorTextStyle,
     this.validateOnUserInteraction = true,
     this.validationPrefixIcons,
     this.validationSuffixIcons,
@@ -160,64 +163,82 @@ class _RTTextFieldState extends State<RTTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.controller,
-      focusNode: widget.focusNode,
-      decoration: (widget.decoration ?? const InputDecoration()).copyWith(
-        errorText: getValidationMessage(),
-        prefixIcon: getPrefixIconBasedOnState(),
-        suffixIcon: getSuffixIconBasedOnState(),
-        icon: getLeadingIconBasedOnState(),
-      ),
-      keyboardType: widget.keyboardType,
-      textInputAction: widget.textInputAction,
-      textCapitalization: widget.textCapitalization,
-      style: widget.style,
-      strutStyle: widget.strutStyle,
-      textAlign: widget.textAlign,
-      textAlignVertical: widget.textAlignVertical,
-      autofocus: widget.autofocus,
-      readOnly: widget.readOnly,
-      toolbarOptions: widget.toolbarOptions,
-      showCursor: widget.showCursor,
-      obscuringCharacter: widget.obscuringCharacter,
-      obscureText: widget.obscureText,
-      autocorrect: widget.autocorrect,
-      smartDashesType: widget.smartDashesType,
-      smartQuotesType: widget.smartQuotesType,
-      enableSuggestions: widget.enableSuggestions,
-      maxLengthEnforcement: widget.maxLengthEnforcement,
-      maxLines: widget.maxLines,
-      minLines: widget.minLines,
-      expands: widget.expands,
-      maxLength: widget.maxLength,
-      onChanged: (value) {
-        if (widget.validateOnUserInteraction == true) {
-          onUserInteractionCallback(value);
-        }
-        if (widget.onChanged != null) {
-          widget.onChanged!(value);
-        }
-      },
-      onTap: widget.onTap,
-      onEditingComplete: widget.onEditingComplete,
-      onFieldSubmitted: widget.onFieldSubmitted,
-      onSaved: widget.onSaved,
-      validator: widget.validatorFunction,
-      inputFormatters: widget.inputFormatters,
-      enabled: widget.enabled,
-      cursorWidth: widget.cursorWidth,
-      cursorHeight: widget.cursorHeight,
-      cursorRadius: widget.cursorRadius,
-      cursorColor: widget.cursorColor,
-      keyboardAppearance: widget.keyboardAppearance,
-      scrollPadding: widget.scrollPadding,
-      enableInteractiveSelection: widget.enableInteractiveSelection,
-      selectionControls: widget.selectionControls,
-      buildCounter: widget.buildCounter,
-      scrollPhysics: widget.scrollPhysics,
-      autofillHints: widget.autofillHints,
-      autovalidateMode: widget.autovalidateMode,
+    return Column(
+      children: [
+        TextFormField(
+          controller: widget.controller,
+          focusNode: widget.focusNode,
+          decoration: (widget.decoration ?? const InputDecoration()).copyWith(
+            errorText: getValidationMessage(),
+            prefixIcon: getPrefixIconBasedOnState(),
+            suffixIcon: getSuffixIconBasedOnState(),
+            icon: getLeadingIconBasedOnState(),
+          ),
+          keyboardType: widget.keyboardType,
+          textInputAction: widget.textInputAction,
+          textCapitalization: widget.textCapitalization,
+          style: widget.style,
+          strutStyle: widget.strutStyle,
+          textAlign: widget.textAlign,
+          textAlignVertical: widget.textAlignVertical,
+          autofocus: widget.autofocus,
+          readOnly: widget.readOnly,
+          toolbarOptions: widget.toolbarOptions,
+          showCursor: widget.showCursor,
+          obscuringCharacter: widget.obscuringCharacter,
+          obscureText: widget.obscureText,
+          autocorrect: widget.autocorrect,
+          smartDashesType: widget.smartDashesType,
+          smartQuotesType: widget.smartQuotesType,
+          enableSuggestions: widget.enableSuggestions,
+          maxLengthEnforcement: widget.maxLengthEnforcement,
+          maxLines: widget.maxLines,
+          minLines: widget.minLines,
+          expands: widget.expands,
+          maxLength: widget.maxLength,
+          onChanged: (value) {
+            if (widget.validateOnUserInteraction == true) {
+              onUserInteractionCallback(value);
+            }
+            if (widget.onChanged != null) {
+              widget.onChanged!(value);
+            }
+          },
+          onTap: widget.onTap,
+          onEditingComplete: widget.onEditingComplete,
+          onFieldSubmitted: widget.onFieldSubmitted,
+          onSaved: widget.onSaved,
+          validator: widget.validatorFunction,
+          inputFormatters: widget.inputFormatters,
+          enabled: widget.enabled,
+          cursorWidth: widget.cursorWidth,
+          cursorHeight: widget.cursorHeight,
+          cursorRadius: widget.cursorRadius,
+          cursorColor: widget.cursorColor,
+          keyboardAppearance: widget.keyboardAppearance,
+          scrollPadding: widget.scrollPadding,
+          enableInteractiveSelection: widget.enableInteractiveSelection,
+          selectionControls: widget.selectionControls,
+          buildCounter: widget.buildCounter,
+          scrollPhysics: widget.scrollPhysics,
+          autofillHints: widget.autofillHints,
+          autovalidateMode: widget.autovalidateMode,
+        ),
+        if (getValidationMessage() != null)
+          Row(
+            children: [
+              Flexible(
+                child: Text(
+                  overflow: widget.customErrorTextStyle?.textOverflow ??
+                      TextOverflow.ellipsis,
+                  getValidationMessage()!,
+                  maxLines: widget.customErrorTextStyle?.maxLines,
+                  style: widget.customErrorTextStyle?.style,
+                ),
+              )
+            ],
+          )
+      ],
     );
   }
 

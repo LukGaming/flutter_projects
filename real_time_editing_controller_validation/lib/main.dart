@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_time_editing_controller_validation/src/classes/error_text_custom_style.dart';
 import 'package:real_time_editing_controller_validation/src/controllers/real_time_form_controller.dart';
 import 'package:real_time_editing_controller_validation/src/classes/leading_validation_icons.dart';
 import 'package:real_time_editing_controller_validation/src/classes/prefix_validation_icons.dart';
@@ -80,26 +81,38 @@ class _FindFormByContextState extends State<FindFormByContext> {
                   return "O valor não pode ficar vazio.";
                 }
                 if (value.length < 5) {
-                  return "O valor deve conter pelo menos 5 caracteres";
+                  return "O valor deve conter pelo menos 5 caracteres, O valor deve conter pelo menos 5 caracteres, O valor deve conter pelo menos 5 caracteres";
                 }
                 return null;
               },
-              validationLeadingIcons: ValidationLeadingIcons(
-                iddleIcon: const Icon(Icons.person),
-                errorIcon: const Icon(Icons.person, color: Colors.red),
-                successIcon: const Icon(Icons.person, color: Colors.green),
-              ),
               validateOnUserInteraction: true,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                errorStyle: TextStyle(),
+              ),
+              customErrorTextStyle: CustomErrorTextStyle(
+                textOverflow: TextOverflow.fade,
+                maxLines: 1,
+                style: const TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+              // validationLeadingIcons: ValidationLeadingIcons(
+              //   iddleIcon: const Icon(Icons.person),
+              //   errorIcon: const Icon(Icons.person, color: Colors.red),
+              //   successIcon: const Icon(Icons.person, color: Colors.green),
+              // ),
+
               validationPrefixIcons: PrefixValidationIcons(
                 iddleIcon: const Icon(Icons.person),
                 errorIcon: const Icon(Icons.person, color: Colors.red),
                 successIcon: const Icon(Icons.person, color: Colors.green),
               ),
-              validationSuffixIcons: SuffixValidationIcons(
-                iddleIcon: const Icon(Icons.person),
-                errorIcon: const Icon(Icons.person, color: Colors.red),
-                successIcon: const Icon(Icons.person, color: Colors.green),
-              ),
+              // validationSuffixIcons: SuffixValidationIcons(
+              //   iddleIcon: const Icon(Icons.person),
+              //   errorIcon: const Icon(Icons.person, color: Colors.red),
+              //   successIcon: const Icon(Icons.person, color: Colors.green),
+              // ),
             ),
             RTTextField(
               controller: secondController,
@@ -108,7 +121,7 @@ class _FindFormByContextState extends State<FindFormByContext> {
                   return "O valor não pode ficar vazio.";
                 }
                 if (value.length < 5) {
-                  return "O valor deve conter pelo menos 5 caracteres";
+                  return "O valor deve conter pelo menos 5 caracteres O valor deve conter pelo menos 5 caracteresO valor deve conter pelo menos 5 caracteresO valor deve conter pelo menos 5 caracteres";
                 }
                 return null;
               },
@@ -116,6 +129,10 @@ class _FindFormByContextState extends State<FindFormByContext> {
                 border: OutlineInputBorder(),
               ),
               validateOnUserInteraction: true,
+              customErrorTextStyle: CustomErrorTextStyle(
+                maxLines: 2,
+                style: const TextStyle(color: Colors.blue),
+              ),
               validationLeadingIcons: ValidationLeadingIcons(
                 iddleIcon: const Icon(Icons.person),
                 errorIcon: const Icon(Icons.person, color: Colors.red),
