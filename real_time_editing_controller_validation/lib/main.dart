@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:real_time_editing_controller_validation/src/objects/leading_validation_icons.dart';
 import 'package:real_time_editing_controller_validation/src/objects/prefix_validation_icons.dart';
+import 'package:real_time_editing_controller_validation/src/objects/suffix_validation_icons.dart';
 import 'package:real_time_editing_controller_validation/src/widgets/custom_text_field.dart';
 
 void main() {
@@ -79,8 +81,18 @@ class _FindFormByContextState extends State<FindFormByContext> {
                 }
                 return null;
               },
-              validateOnUserInteraction: false,
+              validationLeadingIcons: ValidationLeadingIcons(
+                iddleIcon: const Icon(Icons.person),
+                errorIcon: const Icon(Icons.person, color: Colors.red),
+                successIcon: const Icon(Icons.person, color: Colors.green),
+              ),
+              validateOnUserInteraction: true,
               validationPrefixIcons: PrefixValidationIcons(
+                iddleIcon: const Icon(Icons.person),
+                errorIcon: const Icon(Icons.person, color: Colors.red),
+                successIcon: const Icon(Icons.person, color: Colors.green),
+              ),
+              validationSuffixIcons: SuffixValidationIcons(
                 iddleIcon: const Icon(Icons.person),
                 errorIcon: const Icon(Icons.person, color: Colors.red),
                 successIcon: const Icon(Icons.person, color: Colors.green),
@@ -101,7 +113,17 @@ class _FindFormByContextState extends State<FindFormByContext> {
                 border: OutlineInputBorder(),
               ),
               validateOnUserInteraction: true,
+              validationLeadingIcons: ValidationLeadingIcons(
+                iddleIcon: const Icon(Icons.person),
+                errorIcon: const Icon(Icons.person, color: Colors.red),
+                successIcon: const Icon(Icons.person, color: Colors.green),
+              ),
               validationPrefixIcons: PrefixValidationIcons(
+                iddleIcon: const Icon(Icons.person),
+                errorIcon: const Icon(Icons.person, color: Colors.red),
+                successIcon: const Icon(Icons.person, color: Colors.green),
+              ),
+              validationSuffixIcons: SuffixValidationIcons(
                 iddleIcon: const Icon(Icons.person),
                 errorIcon: const Icon(Icons.person, color: Colors.red),
                 successIcon: const Icon(Icons.person, color: Colors.green),

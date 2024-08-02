@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:real_time_editing_controller_validation/src/objects/leading_validation_icons.dart';
 import 'package:real_time_editing_controller_validation/src/objects/prefix_validation_icons.dart';
+import 'package:real_time_editing_controller_validation/src/objects/suffix_validation_icons.dart';
 import 'package:real_time_editing_controller_validation/src/objects/validation_state.dart';
 
 class CustomTextField extends StatefulWidget {
   final bool? validateOnUserInteraction;
   final PrefixValidationIcons? validationPrefixIcons;
+  final SuffixValidationIcons? validationSuffixIcons;
+  final ValidationLeadingIcons? validationLeadingIcons;
   final String? Function(String value) validator;
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -58,6 +62,8 @@ class CustomTextField extends StatefulWidget {
     required this.validator,
     this.validateOnUserInteraction = true,
     this.validationPrefixIcons,
+    this.validationSuffixIcons,
+    this.validationLeadingIcons,
     this.controller,
     this.focusNode,
     this.decoration,
@@ -113,13 +119,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
   ValidationState validationState = IddleValidation();
 
   void onUserInteractionCallback(String value) {
-    if (widget.validateOnUserInteraction == true) {
-      final errorMessage = widget.validator(value);
-      if (errorMessage != null) {
-        validationState = ErrorValidation(errorMessage);
-      } else {
-        validationState = SuccessValidation();
-      }
+    final errorMessage = widget.validator(value);
+    if (errorMessage != null) {
+      validationState = ErrorValidation(errorMessage);
+    } else {
+      validationState = SuccessValidation();
     }
 
     setState(() {});
@@ -133,6 +137,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       decoration: (widget.decoration ?? const InputDecoration()).copyWith(
         errorText: getValidationMessage(),
         prefixIcon: getPrefixIconBasedOnState(),
+        suffixIcon: getSuffixIconBasedOnState(),
+        icon: getLeadingIconBasedOnState(),
       ),
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
@@ -203,6 +209,34 @@ class _CustomTextFieldState extends State<CustomTextField> {
         return widget.validationPrefixIcons!.errorIcon;
       } else {
         return widget.validationPrefixIcons!.successIcon;
+      }
+    }
+    return null;
+  }
+
+  Icon? getSuffixIconBasedOnState() {
+    if (widget.validationSuffixIcons != null) {
+      if (validationState is IddleValidation) {
+        return widget.validationSuffixIcons!.iddleIcon;
+      }
+      if (validationState is ErrorValidation) {
+        return widget.validationSuffixIcons!.errorIcon;
+      } else {
+        return widget.validationSuffixIcons!.successIcon;
+      }
+    }
+    return null;
+  }
+
+  Icon? getLeadingIconBasedOnState() {
+    if (widget.validationLeadingIcons != null) {
+      if (validationState is IddleValidation) {
+        return widget.validationLeadingIcons!.iddleIcon;
+      }
+      if (validationState is ErrorValidation) {
+        return widget.validationLeadingIcons!.errorIcon;
+      } else {
+        return widget.validationLeadingIcons!.successIcon;
       }
     }
     return null;
