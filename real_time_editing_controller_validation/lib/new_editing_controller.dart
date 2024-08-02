@@ -15,7 +15,7 @@ class NewEditingController extends StatefulWidget {
 }
 
 class _NewEditingControllerState extends State<NewEditingController> {
-  MyState? myState;
+  EditingControllersState? myState;
   String? errorText;
   @override
   void initState() {
@@ -25,25 +25,26 @@ class _NewEditingControllerState extends State<NewEditingController> {
         if (scope != null) {
           myState = scope.myState;
           scope.myState.addController(widget.controller);
+          scope.myState.addListener(onFormValidation);
         }
       },
     );
-    widget.controller.addListener(onTextChangeCallback);
     super.initState();
   }
 
-  void onTextChangeCallback() {
-    errorText = "teste";
+  void onFormValidation() {
+    errorText = widget.validator(widget.controller.text);
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    print("rebuilding");
     return TextFormField(
-      onTapAlwaysCalled: true,
       controller: widget.controller,
-      onTap: () => {},
+      onChanged: (value) {
+        errorText = widget.validator(value);
+        setState(() {});
+      },
       validator: (value) => widget.validator(value!),
       decoration: InputDecoration(
         errorText: errorText,
@@ -54,7 +55,6 @@ class _NewEditingControllerState extends State<NewEditingController> {
 
   @override
   void dispose() {
-    widget.controller.removeListener(onTextChangeCallback);
     super.dispose();
   }
 }

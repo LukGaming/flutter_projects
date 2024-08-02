@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_editing_controller_validation/new_editing_controller.dart';
+import 'package:real_time_editing_controller_validation/src/objects/prefix_validation_icons.dart';
+import 'package:real_time_editing_controller_validation/src/widgets/custom_text_field.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,9 +55,7 @@ class FindFormByContext extends StatefulWidget {
 }
 
 class _FindFormByContextState extends State<FindFormByContext> {
-  final MyState myState = MyState();
-  final nameController = TextEditingController();
-  final passwordController = TextEditingController();
+  final EditingControllersState myState = EditingControllersState();
 
   @override
   Widget build(BuildContext context) {
@@ -66,37 +65,29 @@ class _FindFormByContextState extends State<FindFormByContext> {
         myState: myState,
         child: Column(
           children: [
-            NewEditingController(
-              controller: nameController,
+            CustomTextField(
               validator: (value) {
                 if (value == "") {
-                  return "Por favor, preencha o campo.";
+                  return "O valor não pode ficar vazio.";
                 }
                 if (value.length < 5) {
-                  return "O nome não pode conter menos de 5 caracteres";
+                  return "O valor deve conter pelo menos 5 caracteres";
                 }
                 return null;
               },
+              validateOnUserInteraction: true,
+              validationPrefixIcons: PrefixValidationIcons(
+                iddleIcon: const Icon(Icons.person),
+                errorIcon: const Icon(
+                  Icons.person,
+                  color: Colors.red,
+                ),
+                successIcon: const Icon(
+                  Icons.person,
+                  color: Colors.green,
+                ),
+              ),
             ),
-            const SizedBox(height: 20),
-            NewEditingController(
-              controller: passwordController,
-              validator: (value) {
-                if (value == "") {
-                  return "Por favor, preencha o campo.";
-                }
-                if (value.length < 5) {
-                  return "O nome não pode conter menos de 5 caracteres";
-                }
-                return null;
-              },
-            ),
-            ElevatedButton(
-              onPressed: () {
-                myState.validate();
-              },
-              child: const Text("Validate"),
-            )
           ],
         ),
       ),
@@ -105,7 +96,7 @@ class _FindFormByContextState extends State<FindFormByContext> {
 }
 
 class MyForm extends StatefulWidget {
-  final MyState myState;
+  final EditingControllersState myState;
   final Widget child;
   const MyForm({
     super.key,
@@ -128,7 +119,7 @@ class _MyFormState extends State<MyForm> {
 }
 
 class FormScope extends InheritedWidget {
-  final MyState myState;
+  final EditingControllersState myState;
   const FormScope({
     super.key,
     required this.myState,
@@ -142,8 +133,8 @@ class FormScope extends InheritedWidget {
   }
 }
 
-class MyState extends ChangeNotifier {
-  List<TextEditingController> _controllers = [];
+class EditingControllersState extends ChangeNotifier {
+  final List<TextEditingController> _controllers = [];
   void update() {
     notifyListeners();
   }
@@ -158,5 +149,9 @@ class MyState extends ChangeNotifier {
 
   void removeController(TextEditingController controller) {
     _controllers.remove(controller);
+  }
+
+  bool isFormValid() {
+    return true;
   }
 }
