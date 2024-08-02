@@ -59,13 +59,17 @@ class _FindFormByContextState extends State<FindFormByContext> {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+    final _firstController = TextEditingController();
+    final _secondController = TextEditingController();
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: MyForm(
-        myState: myState,
+      child: Form(
+        key: _formKey,
         child: Column(
           children: [
             CustomTextField(
+              controller: _firstController,
               validator: (value) {
                 if (value == "") {
                   return "O valor não pode ficar vazio.";
@@ -75,18 +79,39 @@ class _FindFormByContextState extends State<FindFormByContext> {
                 }
                 return null;
               },
+              validateOnUserInteraction: false,
+              validationPrefixIcons: PrefixValidationIcons(
+                iddleIcon: const Icon(Icons.person),
+                errorIcon: const Icon(Icons.person, color: Colors.red),
+                successIcon: const Icon(Icons.person, color: Colors.green),
+              ),
+            ),
+            CustomTextField(
+              controller: _secondController,
+              validator: (value) {
+                if (value == "") {
+                  return "O valor não pode ficar vazio.";
+                }
+                if (value.length < 5) {
+                  return "O valor deve conter pelo menos 5 caracteres";
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+              ),
               validateOnUserInteraction: true,
               validationPrefixIcons: PrefixValidationIcons(
                 iddleIcon: const Icon(Icons.person),
-                errorIcon: const Icon(
-                  Icons.person,
-                  color: Colors.red,
-                ),
-                successIcon: const Icon(
-                  Icons.person,
-                  color: Colors.green,
-                ),
+                errorIcon: const Icon(Icons.person, color: Colors.red),
+                successIcon: const Icon(Icons.person, color: Colors.green),
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                bool? isFormValid = _formKey.currentState?.validate();
+              },
+              child: const Text("Validate"),
             ),
           ],
         ),
